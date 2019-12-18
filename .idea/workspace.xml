@@ -6,7 +6,28 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="126b42bb-abf4-4208-9609-355a3d872868" name="Default Changelist" comment="" />
+    <list default="true" id="126b42bb-abf4-4208-9609-355a3d872868" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Code.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/HardWareDataUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/HardWareModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Msg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UDPClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UDPServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UDPServerThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UdpClientSocket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/johnny/controller/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/johnny/controller/IndexController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +47,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -42,17 +66,25 @@
     </option>
   </component>
   <component name="ProjectId" id="1VA28w24gO7vhJOobstuzGKc2wt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../web/apache-tomcat-8.5.38/webapps" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/johnny/udp" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.johnny.udp" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\firmwareManager\src\main\java\com\johnny\udp" />
       <recent name="F:\firmwareManager\src\main\resources\spring" />
     </key>
   </component>
@@ -70,6 +102,8 @@
   </component>
   <component name="RunManager">
     <configuration name="tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.38" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8885/firmwareManager/firmware/index" />
+      <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <deployment>
         <artifact name="firmwareManager">
           <settings>
@@ -151,11 +185,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1576681423878</updated>
-      <workItem from="1576681431931" duration="2627000" />
+      <workItem from="1576681431931" duration="7238000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
