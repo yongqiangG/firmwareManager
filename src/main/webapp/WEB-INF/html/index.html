@@ -37,7 +37,7 @@
             alert('机器码和端口号不能为空');
             return;
         }
-        $.post('http://localhost:8885/firmwareManager/firmware/macReset' ,{macCode:macCode,port:port},function(result){
+        $.post('http://localhost:8820/firmwareManager/firmware/macReset' ,{macCode:macCode,port:port},function(result){
             alert('success');
         });
     }
