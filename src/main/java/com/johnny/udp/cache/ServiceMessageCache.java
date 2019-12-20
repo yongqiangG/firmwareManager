@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.johnny.udp.Code;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -54,4 +55,16 @@ public class ServiceMessageCache {
         int intCmd = Integer.parseInt(cmd, 16);
         return intCmd;
     }
+    /**
+     * 初始化MAC对应IP
+     */
+    public static void InitMacIP()
+    {
+        Map map = new HashMap();
+        map.put("macCode","");
+    }
+    /**
+     * 初始化1
+     */
+    public static long currentSave_Index=1;
 }

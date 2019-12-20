@@ -1,5 +1,6 @@
 package com.johnny.controller;
 
+import com.johnny.udp.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -7,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/firmware")
@@ -23,15 +22,34 @@ public class IndexController {
 
     @RequestMapping(value = "/macReset")
     @ResponseBody
-    public Map macReset(HttpServletRequest request) {
-        Map<String,Object> map = new HashMap<String,Object>();
-        String macCode = request.getParameter("macCode");
-        String port = request.getParameter("port");
-        logger.info("macCode:{}",macCode);
-        System.out.println("macCode:" + macCode);
+    public void macReset(HttpServletRequest request) {
+        logger.info("开始启动服务---------------------");
+        /**
+         * UDP 服务器主线程
+         */
+        //new MainThread().start();  myUDPServer
+        String myUDPServer= Config.MY_UDP_SERVER;
+        if(myUDPServer!=null && "on".equals(myUDPServer)){
+            //UDP服务重启机制
+            UDPMainThread udpMth = new UDPMainThread();
+            UDPMainThreadListener listener = new UDPMainThreadListener();
+            udpMth.addObserver(listener);
+            new Thread(udpMth).start();
+        }else{
+            new MainThread().start();
+        }
 
-        map.put("success",true);
-        map.put("msg","success");
-        return map;
+        /**
+         * UDP消息发送线程
+         */
+        String msgSendThreadFlag=Config.MY_MSG_SEND_THREAD_FLAG;
+        if(msgSendThreadFlag!=null && "on".equals(msgSendThreadFlag)){//重启机制
+            MessageSendThreadMain msgThreadMain = new MessageSendThreadMain();
+            MessageSendThreadMainListener msgSendListener = new MessageSendThreadMainListener();
+            msgThreadMain.addObserver(msgSendListener);
+            new Thread(msgThreadMain).start();
+        }else{
+            new MessageSenderThread().start();
+        }
     }
 }

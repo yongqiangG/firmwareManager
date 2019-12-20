@@ -3,6 +3,7 @@ package com.johnny.udp;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.util.concurrent.ExecutorService;
 
 public class UdpServer {
 
@@ -36,6 +37,20 @@ public class UdpServer {
         try {
             datagramSocket.receive(packet);
             new UdpServerThread(packet,datagramSocket).start();
+            return packet;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    /*用线程池来处理 通常是通过此处进行处理*/
+    public static DatagramPacket receive(DatagramPacket packet, ExecutorService pool) throws Exception {
+
+        try {
+            datagramSocket.receive(packet);
+            Thread t1=new UdpServerThread(packet,datagramSocket);
+            pool.execute(t1);
             return packet;
         } catch (Exception e) {
             e.printStackTrace();

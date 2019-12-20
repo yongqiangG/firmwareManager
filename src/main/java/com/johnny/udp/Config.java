@@ -22,4 +22,15 @@ public class Config {
      * TXPARK
      */
     public static final String UDP_HEADER_CODE = "54585041524b";
+    /**
+     * 终端udp端口
+     */
+    public static final int UDP_CLIENT_PORT = 3341;
+    /**
+     * 最大线程数
+     */
+    public static final int MAX_POOL_SIZE = 50;
+
+    public static final String MY_UDP_SERVER = "on";
+    public static final String MY_MSG_SEND_THREAD_FLAG = "on";
 }
