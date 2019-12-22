@@ -10,44 +10,54 @@ public class MessageCallService {
     public synchronized void read(String msg,UdpClientSocket client,Long index) {
         //LogAPI.GetInstance().Info(index + "监测数据:" +msg);
         if (!checkMsg(msg)) {
-            logger.info("消息格式不正确:{}"+msg);
+            logger.info("消息格式不正确={}",msg);
             return;
         }
         int cmd = getCommand(msg);
-
+        logger.info("硬件指令={}",cmd);
         switch (cmd) {
             case Code.GET_MAC_VERSION:
+                //0x71
                 getMacVersion(msg);
                 break;
             case Code.MAC_CRC_CHECK:
+                //0x73
                 sendMacCRCCheck(msg);
                 break;
             case Code.MAC_FIRMWARE_ENCRYPTION:
+                //0x74
                 sendMacFirmwareEncryption(msg);
                 break;
             case Code.MAC_FIRMWARE_UPGRADE:
+                ////0x72
                 sendMacFirmwareUpgrade(msg);
                 break;
             case Code.MAC_FIRMWARE_UPGRADE_END:
+                //0x76
                 sendMacFirmwareUpgradeEnd(msg);
                 break;
             case Code.MAC_FIRMWARE_UPGRADE_START:
+                //0x75
                 sendMacFirmwareUpgradeStart(msg);
                 break;
             case Code.MAC_READY_SHAKE:
+                //0x7F
                 getMacReadyShake(msg);
                 break;
             case Code.MAC_RESET_SHAKE:
-                sendMacResetShake(msg);
+                //0x70
+                sendMacResetShake(msg,client);
                 break;
             case Code.MAC_TO_WORK:
+                //0x71
                 sendMacToWork(msg);
                 break;
             case Code.MAC_CODE_MODIFY:
+                //0x79
                 sendMacCodeModify(msg);
                 break;
             default:
-                logger.info("未处理的数据={}"+msg);
+                logger.info("未处理的数据={}",msg);
                 break;
         }
     }
@@ -60,7 +70,8 @@ public class MessageCallService {
 
     }
 
-    private void sendMacResetShake(String msg) {
+    private void sendMacResetShake(String msg,UdpClientSocket client) {
+        //接收到主机复位重启的0x70指令
 
     }
 

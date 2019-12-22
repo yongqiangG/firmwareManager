@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 @RequestMapping("/firmware")
@@ -18,6 +20,11 @@ public class IndexController {
     public String index(){
         //TODO
         return "index";
+    }
+    @RequestMapping(value = "/index1")
+    public String index1(){
+        //TODO
+        return "index1";
     }
 
     @RequestMapping(value = "/macReset")
@@ -43,13 +50,27 @@ public class IndexController {
          * UDP消息发送线程
          */
         String msgSendThreadFlag=Config.MY_MSG_SEND_THREAD_FLAG;
-        if(msgSendThreadFlag!=null && "on".equals(msgSendThreadFlag)){//重启机制
+        if(msgSendThreadFlag!=null && "on".equals(msgSendThreadFlag)){
+            //重启机制
             MessageSendThreadMain msgThreadMain = new MessageSendThreadMain();
             MessageSendThreadMainListener msgSendListener = new MessageSendThreadMainListener();
             msgThreadMain.addObserver(msgSendListener);
             new Thread(msgThreadMain).start();
         }else{
             new MessageSenderThread().start();
+        }
+        /**
+         * 终端设备超时检测线程
+         */
+        String sendPoolFlag=Config.MY_SEND_POOL_FLAG;
+        if(sendPoolFlag!=null&& "on".equals(sendPoolFlag)){
+            String poolNumString=Config.SEND_POOL_SIZE;
+            int sendPool=Integer.parseInt(poolNumString.trim());
+            ExecutorService timePool = Executors.newFixedThreadPool(sendPool);
+            Thread myTimeOuThread=new TimeoutThread();
+            timePool.execute(myTimeOuThread);
+        }else{
+            new TimeoutThread().start();
         }
     }
 }

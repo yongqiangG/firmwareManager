@@ -19,7 +19,11 @@ public class TimeoutThread extends Thread {
         List<Long> delList = new ArrayList<Long>();
         String msg = "";
         while (true) {
-
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Date d = new Date();
             long now = d.getTime();
             /**

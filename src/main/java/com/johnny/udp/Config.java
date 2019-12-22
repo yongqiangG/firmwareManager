@@ -32,5 +32,8 @@ public class Config {
     public static final int MAX_POOL_SIZE = 50;
 
     public static final String MY_UDP_SERVER = "on";
+    public static final String MY_SEND_POOL_FLAG = "on";
     public static final String MY_MSG_SEND_THREAD_FLAG = "on";
+    public static final String SEND_POOL_SIZE = "5";
+
 }

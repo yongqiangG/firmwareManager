@@ -51,9 +51,12 @@ public class ServiceMessageCache {
 
     //返回16进制指令数字
     private static int getCommand(String msg){
-        String cmd =  msg.substring(34,38);
-        int intCmd = Integer.parseInt(cmd, 16);
-        return intCmd;
+        if(msg.length()>40){
+            String cmd =  msg.substring(34,38);
+            int intCmd = Integer.parseInt(cmd, 16);
+            return intCmd;
+        }
+        return -1;
     }
     /**
      * 初始化MAC对应IP

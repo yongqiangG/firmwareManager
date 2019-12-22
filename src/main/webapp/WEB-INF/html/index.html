@@ -33,11 +33,8 @@
         var macCode = $("#macCode").val();
         var port = $("#port").val();
         console.log('macCode:'+macCode+',port:'+port);
-        if(macCode.trim()=="" || port.trim()==""){
-            alert('机器码和端口号不能为空');
-            return;
-        }
-        $.post('http://localhost:8820/firmwareManager/firmware/macReset' ,{macCode:macCode,port:port},function(result){
+
+        $.post('http://localhost:8885/firmwareManager/firmware/macReset' ,{macCode:macCode,port:port},function(result){
             alert('success');
         });
     }
