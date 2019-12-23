@@ -30,4 +30,7 @@ public class Code {
 
     //终端机器码修改设置指令
     public static final int MAC_CODE_MODIFY = 0x79;
+
+    //ip绑定指令
+    public static final int IP_BIND = 0x01;
 }

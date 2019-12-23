@@ -72,7 +72,8 @@ public class MessageCallService {
 
     private void sendMacResetShake(String msg,UdpClientSocket client) {
         //接收到主机复位重启的0x70指令
-
+        //获取设备机器码
+        String macCode = getMacCode(msg);
     }
 
     private void getMacReadyShake(String msg) {
@@ -122,5 +123,19 @@ public class MessageCallService {
         int intCmd = Integer.parseInt(cmd, 16);
         //LogAPI.GetInstance().Info("获取到的16进制："+cmd+"  10进制："+intCmd);
         return intCmd;
+    }
+
+    /**
+     * 20-23
+     * 获取机器码
+     */
+    private static String getMacCode(String msg){
+        String code =  msg.substring(40,48);
+        return  Long.parseLong(code,16)+"";
+    }
+
+
+    private static String getMsgContent(String msg){
+        return msg.substring(50,msg.length() - 4);
     }
 }

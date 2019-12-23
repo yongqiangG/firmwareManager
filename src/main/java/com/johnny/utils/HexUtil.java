@@ -126,6 +126,10 @@ public class HexUtil {
         }
         return n;
     }
+
+    /**
+     * 16进制字符串转byte[]
+     */
     public static byte hexToByte(String inHex){
         return (byte)Integer.parseInt(inHex,16);
     }

@@ -27,6 +27,15 @@ public class IndexController {
         return "index1";
     }
 
+    @RequestMapping(value = "/bindDevice")
+    public void bindDevice(HttpServletRequest request){
+        String macCode = request.getParameter("macCode");
+        String ipAddress = request.getParameter("ipAddress");
+        String ipBroadcast = request.getParameter("ipBroadcast");
+        logger.info("macCode:"+macCode+",ipAddress:"+ipAddress+",ipBroadcast"+ipBroadcast);
+        MessageSender.sendBindDevice(macCode,ipAddress,ipBroadcast);
+    }
+
     @RequestMapping(value = "/macReset")
     @ResponseBody
     public void macReset(HttpServletRequest request) {

@@ -5,6 +5,9 @@ import com.johnny.utils.HexUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ */
 public class MessageSender {
     private static Logger logger = LoggerFactory.getLogger(MessageSender.class);
 
@@ -76,28 +79,52 @@ public class MessageSender {
             }
         }
     }
+    /**
+     *          示例:
+     *          设备重连间隔
+     *  		sb.append(HexUtil.toHexString(30,2));
+     *   		服务器ip
+     *   		sb.append(HexUtil.toIpHexStr(ip));
+     *   		默认端口
+     *   		sb.append(HexUtil.toHexString(3341,4));
+     */
 
     /**
-     * 获取固件版本号
+     * 发送获取固件版本号
      */
-    public static String getPanelStatusMsg(String macCode){
+    public static void sendPanelStatusMsg(String macCode,String ip){
         String header = getHeader(0,macCode,Code.GET_MAC_VERSION);
         StringBuffer sb = new StringBuffer("");
         String content =sb.toString();
         content = toMsg(header,content);
-        return content;
-    }
-    /**
-     * 获取固件版本号
-     */
-    public static void sendPanelStatusMsg(String macCode,String ip){
-        String msg = getPanelStatusMsg(macCode);
-        System.out.println(msg);
         try {
-            MessageSender.sendMsg(ip, msg);
-            logger.info("获取固件版本={}"+msg);
+            MessageSender.sendMsg(ip, content);
+            logger.info("获取固件版本={}",content);
         } catch (Exception e) {
-            logger.error("获取固件版本={}"+e.getMessage());
+            logger.error("获取固件版本出错了={}",e.getMessage());
         }
     }
+
+    /**
+     * 发送使设备绑定到服务端
+     */
+    public static void sendBindDevice(String macCode,String deviceIp,String deviceBroadcast){
+        String header = getHeader(0,macCode,Code.IP_BIND);
+        StringBuffer sb = new StringBuffer("");
+        //设备指定ip
+        sb.append(HexUtil.toIpHexStr(deviceIp));
+        //设备指定网关
+        sb.append(HexUtil.toIpHexStr(deviceBroadcast));
+        String content = sb.toString();
+        content = toMsg(header,content);
+        //广播ip
+        String broadcastIp = deviceBroadcast.substring(0,deviceBroadcast.lastIndexOf("."))+".255";
+        try{
+            MessageSender.sendMsg(broadcastIp,content);
+            logger.info("绑定ip={}",content);
+        }catch(Exception e){
+            logger.info("出错了={}",e.getMessage());
+        }
+    }
+
 }
