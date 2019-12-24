@@ -7,16 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/firmwareManager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/firmwareManager.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firmwareManager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/firmwareManager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HexUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HexUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/johnny/controller/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/johnny/controller/IndexController.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -224,7 +216,8 @@
       <workItem from="1576992295290" duration="19000" />
       <workItem from="1576992379785" duration="1129000" />
       <workItem from="1576994336868" duration="13534000" />
-      <workItem from="1577062495668" duration="13854000" />
+      <workItem from="1577062495668" duration="14536000" />
+      <workItem from="1577173317024" duration="6225000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -233,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576748637922</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="udp数据处理">
+      <created>1577094439704</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1577094439704</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,11 +278,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/johnny/udp/UDPMainThread.java</url>
           <line>29</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java</url>
-          <line>120</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>

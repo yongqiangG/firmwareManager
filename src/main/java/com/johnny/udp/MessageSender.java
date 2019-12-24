@@ -79,8 +79,9 @@ public class MessageSender {
             }
         }
     }
+
     /**
-     *          示例:
+     *          HexUtil示例:
      *          设备重连间隔
      *  		sb.append(HexUtil.toHexString(30,2));
      *   		服务器ip
@@ -91,6 +92,7 @@ public class MessageSender {
 
     /**
      * 发送获取固件版本号
+     * 0x71
      */
     public static void sendPanelStatusMsg(String macCode,String ip){
         String header = getHeader(0,macCode,Code.GET_MAC_VERSION);
@@ -101,12 +103,13 @@ public class MessageSender {
             MessageSender.sendMsg(ip, content);
             logger.info("获取固件版本={}",content);
         } catch (Exception e) {
-            logger.error("获取固件版本出错了={}",e.getMessage());
+            logger.error("发送0x71指令出错了={}",e.getMessage());
         }
     }
 
     /**
      * 发送使设备绑定到服务端
+     * 0x01
      */
     public static void sendBindDevice(String macCode,String deviceIp,String deviceBroadcast){
         String header = getHeader(0,macCode,Code.IP_BIND);
@@ -123,8 +126,93 @@ public class MessageSender {
             MessageSender.sendMsg(broadcastIp,content);
             logger.info("绑定ip={}",content);
         }catch(Exception e){
-            logger.info("出错了={}",e.getMessage());
+            logger.error("发送0x01指令出错了={}",e.getMessage());
         }
     }
+
+    /**
+     * 回复设备重启0x70,使之进入烧写模式
+     * 0x70
+     */
+    public static void sendMacResetShake(String macCode,String ip){
+        String header = getHeader(0,macCode,Code.MAC_RESET_SHAKE);
+        StringBuffer sb = new StringBuffer("");
+        String content =sb.toString();
+        content = toMsg(header,content);
+        try {
+            MessageSender.sendMsg(ip,content);
+            logger.info("回复硬件重启复位={}",content);
+        } catch (Exception e) {
+            logger.error("发送0x70指令出错了={}",e.getMessage());
+        }
+    }
+    /**
+     * 固件升级启动,是硬件重启复位进入烧写模式
+     * 0x75
+     */
+    public static void sendFirmwareUpgradeStart(String macCode,String ip){
+        String header = getHeader(0,macCode,Code.MAC_FIRMWARE_UPGRADE_START);
+        StringBuffer sb = new StringBuffer("");
+        String content =sb.toString();
+        content = toMsg(header,content);
+        try {
+            MessageSender.sendMsg(ip,content);
+            logger.info("固件升级启动,使硬件进入重启复位={}",content);
+        } catch (Exception e) {
+            logger.error("发送0x75指令出错了={}",e.getMessage());
+        }
+    }
+    /**
+     * 固件升级结束指令
+     * 0x76
+     */
+    public static void sendFirmwareUpgradeEnd(String macCode,String ip){
+        String header = getHeader(0,macCode,Code.MAC_FIRMWARE_UPGRADE_END);
+        StringBuffer sb = new StringBuffer("");
+        String content =sb.toString();
+        content = toMsg(header,content);
+        try {
+            MessageSender.sendMsg(ip,content);
+            logger.info("固件升级结束发送指令={}",content);
+        } catch (Exception e) {
+            logger.error("发送0x76指令出错了={}",e.getMessage());
+        }
+    }
+
+    /**
+     * 发送使硬件进入应用模式
+     * 0x77
+     */
+    public static void sendMacToWork(String macCode,String ip){
+        String header = getHeader(0,macCode,Code.MAC_TO_WORK);
+        StringBuffer sb = new StringBuffer("");
+        String content =sb.toString();
+        content = toMsg(header,content);
+        try {
+            MessageSender.sendMsg(ip,content);
+            logger.info("已发送指令={}",content);
+        } catch (Exception e) {
+            logger.error("发送0x77指令出错了={}",e.getMessage());
+        }
+    }
+
+    /**
+     * 更改硬件机器码
+     * 0x79
+     */
+    public static void sendMacToWork(String macCode,String ip,String destMacCode){
+        String header = getHeader(0,macCode,Code.MAC_CODE_MODIFY);
+        StringBuffer sb = new StringBuffer("");
+        sb.append(HexUtil.toIpHexStr(destMacCode));
+        String content =sb.toString();
+        content = toMsg(header,content);
+        try {
+            MessageSender.sendMsg(ip,content);
+            logger.info("已发送指令={}",content);
+        } catch (Exception e) {
+            logger.error("发送0x79指令出错了={}",e.getMessage());
+        }
+    }
+
 
 }
