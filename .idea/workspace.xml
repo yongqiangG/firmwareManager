@@ -7,8 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Firmware.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HexUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HexUtil.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -217,7 +221,8 @@
       <workItem from="1576992379785" duration="1129000" />
       <workItem from="1576994336868" duration="13534000" />
       <workItem from="1577062495668" duration="14536000" />
-      <workItem from="1577173317024" duration="6225000" />
+      <workItem from="1577173317024" duration="6665000" />
+      <workItem from="1577234798187" duration="19575000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -233,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577094439704</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="发送端数据">
+      <created>1577181056668</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577181056668</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,7 +266,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="udp数据处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="udp数据处理" />
+    <MESSAGE value="发送端数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="发送端数据" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

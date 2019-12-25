@@ -38,7 +38,21 @@ public class HexUtil {
             n = "0" + n;
         }
         if (n.length() > length) {
-            logger.error("出现异常={}"+"数字过大");
+            logger.error("toHexString(int number, int length)出现异常={}","数字过大");
+        }
+        return n;
+    }
+
+    public static String toHexString4TwoByte(int number, int length) {
+        String n = Integer.toHexString(number);
+        if (length == 0) {
+            return n;
+        }
+        while (n.length() < length) {
+            n = "0" + n;
+        }
+        if (n.length() > length) {
+            logger.error("toHexString(int number, int length)出现异常={}","数字过大");
         }
         return n;
     }
@@ -53,7 +67,7 @@ public class HexUtil {
             return n;
         }
         if (n.length() > length) {
-            logger.error("出现异常={}"+"数字过大");
+            logger.error("toHexString(long number, int length)出现异常={}"+"数字过大");
         }
         while (n.length() < length) {
             n = "0" + n;

@@ -1,5 +1,6 @@
 package com.johnny.udp;
 
+import com.johnny.udp.cache.MsgCache;
 import com.johnny.utils.CRC16;
 import com.johnny.utils.HexUtil;
 import org.slf4j.Logger;
@@ -42,10 +43,10 @@ public class MessageSender {
         StringBuffer result = new StringBuffer();
         int contentLength = content.length() / 2 + 1; //存储长度的1位byte
         int total = header.length() / 2  + contentLength  + 2  + 2;// crc两位byte  头长度2位byte
-        String totalStr = HexUtil.toHexString(total, 2);
+        String totalStr = HexUtil.toHexString(total, 4);
         result.append(totalStr+totalStr);
         result.append(header);//头部 0-23
-        result.append(HexUtil.toHexString(contentLength, 2));//记录长度
+        result.append(HexUtil.toHexString(contentLength, 4));//记录长度
         result.append(content);
         int crc = CRC16.ccr16(result.toString());
         result.append(HexUtil.toHexString(crc,	 4));
@@ -64,6 +65,21 @@ public class MessageSender {
             System.out.println("指令发送失败    IP"+ ip +" 信息内容："+ msg);
             e.printStackTrace();
         }
+    }
+    /**
+     * 发送消息，失败重发
+     * @param ip
+     * @param msg
+     * @param macCode
+     * @param seq
+     * @param cmd
+     */
+    public static void sendMsg(String ip,String msg,String macCode,int seq,int cmd){
+        if(seq > 0){
+            Msg m = new Msg(macCode,seq,cmd,msg);
+            MsgCache.putMsg(macCode,seq,m);
+        }
+        sendMsg(ip,msg);
     }
 
     public static void sendUnresponseMsg(Msg msg,String ip,int port){
@@ -212,6 +228,20 @@ public class MessageSender {
         } catch (Exception e) {
             logger.error("发送0x79指令出错了={}",e.getMessage());
         }
+    }
+    /**
+     * 固件升级
+     * 0x72
+     */
+    public static void sendLogicTableRowDataPC(String macCode, String ip,int port,String s){
+        logger.info("发送逻辑中");
+        String header = getHeader(0,macCode,Code.MAC_FIRMWARE_UPGRADE);
+        StringBuffer sb = new StringBuffer("");
+        //固件数据部分
+        sb.append(s);
+        String content = new String(sb);
+        content = toMsg(header,content);
+        sendMsg(ip,content,macCode,0,Code.MAC_FIRMWARE_UPGRADE);
     }
 
 
