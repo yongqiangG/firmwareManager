@@ -1,8 +1,8 @@
 package com.johnny.udp.cache;
 
+import com.johnny.udp.Code;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.johnny.udp.Code;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,4 +70,57 @@ public class ServiceMessageCache {
      * 初始化1
      */
     public static long currentSave_Index=1;
+    /**
+     * mac与ip端口映射关系
+     */
+    private static Map<Long, String> MapIPPort = new ConcurrentHashMap<Long, String>();
+    /**
+     * 更新mac与ip端口对应关系
+     */
+    public static void RefreshIPPort(String msg,String ip,int port){
+        if(msg.length()<48)return;
+        String code =  msg.substring(40,48);
+        Long mac =  Long.parseLong(code,16);
+        if(MapIPPort.containsKey(mac)){
+            MapIPPort.remove(mac);
+            MapIPPort.put(mac, ip+"#"+port);
+            System.out.println("更新设备信息,mac:"+mac+",ip:"+ip+",port:"+port);
+        }else{
+            MapIPPort.put(mac, ip+"#"+port);
+            System.out.println("新增设备信息,mac:"+mac+",ip:"+ip+",port:"+port);
+        }
+    }
+
+    /**
+     * 获取IP
+     * String ip = ServiceMessageCache.getIpByMac(map.get("machineCode").toString());
+     */
+    public static String getIpByMac(String mac){
+        Long long1 = Long.parseLong(mac);
+        return getIp(long1);
+    }
+    public static String getIp(Long mac){
+        if(MapIPPort.containsKey(mac)){
+            String ipport = MapIPPort.get(mac);
+            if(ipport.indexOf("#")>0)
+            {
+                return ipport.split("#")[0];
+            }
+        }
+        return "";
+    }
+    /**
+     * 获取port
+     * int port = ServiceMessageCache.getPort(Long.parseLong(map.get("machineCode").toString()));
+     */
+    public static int getPort(long mac){
+        if(MapIPPort.containsKey(mac)){
+            String ipport = MapIPPort.get(mac);
+            if(ipport.indexOf("#")>0)
+            {
+                return Integer.parseInt(ipport.split("#")[1]);
+            }
+        }
+        return 0;
+    }
 }

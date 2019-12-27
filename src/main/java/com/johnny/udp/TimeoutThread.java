@@ -62,7 +62,7 @@ public class TimeoutThread extends Thread {
                     delList.clear();
                 }
             } catch (Exception e) {
-
+                logger.info("出错啦={}",e.getMessage());
             }
         }
     }

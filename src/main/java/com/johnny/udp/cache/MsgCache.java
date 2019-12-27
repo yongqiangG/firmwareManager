@@ -24,7 +24,7 @@ public class MsgCache {
      * 服务端已响应终端消息
      * key : 终端编码 + "_" + 报文号
      */
-    public static final  Map<String,ResponseMsg> responseMsg = new ConcurrentHashMap<String, ResponseMsg>();
+    public static final  Map<String, ResponseMsg> responseMsg = new ConcurrentHashMap<String, ResponseMsg>();
     public static void removeMsg(String macCode,int seq,int cmd){
 
         Msg msg = unResponseMsg.get(macCode + "_" + seq);

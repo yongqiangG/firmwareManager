@@ -33,4 +33,7 @@ public class Code {
 
     //ip绑定指令
     public static final int IP_BIND = 0x01;
+
+    //硬件心跳包
+    public static final int MAC_HEART_BEAT = 0x88;
 }

@@ -44,7 +44,7 @@
         var port = $("#port").val();
         var ipAddress = $("#ipAddress").val();
         console.log('macCode:'+macCode+',port:'+port+',ipAddress'+ipAddress);
-        $.post('http://localhost:8820/firmwareManager/firmware/macReset' ,{macCode:macCode,port:port,ipAddress:ipAddress},function(result){
+        $.post('/firmwareManager/firmware/macReset' ,{macCode:macCode,port:port,ipAddress:ipAddress},function(result){
             alert('success');
         });
     }
@@ -54,7 +54,7 @@
         var port = $("#port").val();
         var ipAddress = $("#ipAddress").val();
         var ipBroadcast = $("#ipBroadcast").val();
-        $.post('http://localhost:8820/firmwareManager/firmware/bindDevice' ,{macCode:macCode,port:port,ipAddress:ipAddress,ipBroadcast:ipBroadcast},function(result){
+        $.post('/firmwareManager/firmware/bindDevice' ,{macCode:macCode,port:port,ipAddress:ipAddress,ipBroadcast:ipBroadcast},function(result){
             alert('success');
         });
     }

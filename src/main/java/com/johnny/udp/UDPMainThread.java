@@ -50,7 +50,7 @@ public class UDPMainThread extends Observable implements Runnable {
         }
         //System.out.println("新的机制:"+ sb.toString());
         ServiceMessageCache.AddServiceMsg(sb.toString());
-        //ServiceMessageCache.RefreshIPPort(sb.toString(), orgHost, port);
+        ServiceMessageCache.RefreshIPPort(sb.toString(), orgHost, port);
         //ServiceMessageCache.Msg2IPPort(sb,)
     }
 }
