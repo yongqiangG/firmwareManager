@@ -43,6 +43,10 @@ public class FirmwareUtil {
     }
     //读取每一行数据
     public static List getLines(File file){
+<<<<<<< HEAD
+=======
+        System.out.println(file.getPath());
+>>>>>>> origin/master
         File hFile = new File(file.getPath());
         InputStream inputStream = null;
         BufferedReader bufferedReader = null;
@@ -112,6 +116,10 @@ public class FirmwareUtil {
             for(int j=0;j<16;j++){
                 if((i*16+j+1)>list.size()){
                     flag = true;
+<<<<<<< HEAD
+=======
+                    System.out.println("i="+i+",j="+j);
+>>>>>>> origin/master
                     break;
                 }
                 sb.append(list.get(i*16+j)+"-");
@@ -121,6 +129,10 @@ public class FirmwareUtil {
                 break;
             }
         }
+<<<<<<< HEAD
+=======
+        System.out.println(list1.get(list1.size()-1));
+>>>>>>> origin/master
         return list1;
     }
     //转换成我们需要发送的udp数据包
