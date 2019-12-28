@@ -219,6 +219,7 @@ class LogicMsgPCSenderThread extends Thread {
                 }
                 MessageSender.sendLogicTableRowDataPC(macCode,ip,port,s);
                 MsgCache.sendPCCurrentIndex=0;
+                MsgCache.sendSuccessCount++;
                 logger.info("已发送第"+i+"条固件数据");
                 if (checkRCUback()) {
                     break;
@@ -228,6 +229,7 @@ class LogicMsgPCSenderThread extends Thread {
         }
         //发送结束指令
         MessageSender.sendFirmwareUpgradeEnd(macCode,ip,3341);
+        MsgCache.clearSend();
         Long t2 = System.currentTimeMillis();
         logger.info("总耗时={}",t2-t1);
     }

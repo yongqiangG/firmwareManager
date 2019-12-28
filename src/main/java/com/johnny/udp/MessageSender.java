@@ -210,7 +210,7 @@ public class MessageSender {
         content = toMsg(header, content);
         try {
             MessageSender.sendMsg(ip, port,content);
-            logger.info("已发送指令={}", content);
+            logger.info("已发送硬件进入应用模式指令={}", content);
         } catch (Exception e) {
             logger.error("发送0x77指令出错了={}", e.getMessage());
         }
@@ -239,6 +239,19 @@ public class MessageSender {
      * 0x72
      */
     public static void sendLogicTableRowDataPC(String macCode, String ip, int port, String s) {
+        String header = getHeader(0, macCode, Code.MAC_FIRMWARE_UPGRADE);
+        StringBuffer sb = new StringBuffer("");
+        //固件数据部分
+        sb.append(s);
+        String content = new String(sb);
+        content = toMsg(header, content);
+        sendMsg(ip, port,content, macCode, 0, Code.MAC_FIRMWARE_UPGRADE);
+    }
+    /**
+     * 发送第一条固件升级指令
+     * 0x72
+     */
+    public static void sendFirstFirmwareUpgrade(String macCode, String ip, int port, String s){
         String header = getHeader(0, macCode, Code.MAC_FIRMWARE_UPGRADE);
         StringBuffer sb = new StringBuffer("");
         //固件数据部分

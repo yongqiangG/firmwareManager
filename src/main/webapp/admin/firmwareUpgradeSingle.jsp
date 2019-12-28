@@ -17,8 +17,9 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/static/layer/layer.js">
-    </script>
+            src="${pageContext.request.contextPath}/static/layer/layer.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/static/jquery_form.js"></script>
     <script type="text/javascript">
         //个人信息提交
         function submitData(){
@@ -46,7 +47,7 @@
 
 <body style="margin: 10px; font-family: microsoft yahei">
 <div id="p" class="easyui-panel" title="固件升级" style="padding: 10px">
-    <form id="form1" action="${pageContext.request.contextPath}/admin/blogger/save.do" method="post" enctype="multipart/form-data">
+    <form id="form1" action="${pageContext.request.contextPath}/firmware/upload" method="post" enctype="multipart/form-data">
         <input type="hidden" id="id" name="id" value="${currentUser.id}">
         <input type="hidden" id="profile" name="profile" value="${currentUser.profile}">
         <table cellspacing="20px">
@@ -81,10 +82,17 @@
                 <td><a href="javascript:intoWorkMode()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">进入应用模式</a></td>
                 <td id="intoWorkModeInfo"></td>
             </tr>
+
             <tr>
                 <td></td>
-                <td><a href="javascript:firmwareUpgrade()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">固件升级开始</a></td>
-                <td id="firmwareUpgradeInfo"></td>
+                <td><a href="javascript:submitBtn()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">固件升级开始</a></td>
+                <td id="submitInfo"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><div id="progressbar" class="easyui-progressbar" data-options="value:0" style="width:400px;"></div></td>
+                <td id="progressbarInfo"></td>
             </tr>
 
         </table>
@@ -95,7 +103,7 @@
         var machineCode = $("#machineCode").val();
         var machineIp = $("#machineIp");
         var machinePort = $("#machinePort");
-        if(validMachineCode(machineCode)){
+        if(validMachineCode()){
             $.post('/firmwareManager/firmware/getIpAndPort', {machineCode:machineCode}, function (result) {
                 machineIp.val('');
                 machinePort.val('');
@@ -111,27 +119,84 @@
     }
     function intoUpgradeMode(){
         var machineCode = $("#machineCode").val();
-        $.post('/firmwareManager/firmware/intoUpgradeMode',{machineCode:machineCode},function(result){
-            if(result && result.success){
-                layer.msg('机器码'+machineCode+'的设备已进入烧写模式');
-            }else{
-                layer.msg(result.errorInfo);
-            }
-        })
+        if(validMachineCode()){
+            $.post('/firmwareManager/firmware/intoUpgradeMode',{machineCode:machineCode},function(result){
+                if(result && result.success){
+                    layer.msg('机器码'+machineCode+'的设备已进入烧写模式');
+                }else{
+                    layer.msg(result.errorInfo);
+                }
+            })
+        }
     }
     function intoWorkMode(){
         var machineCode = $("#machineCode").val();
+        if(validMachineCode()){
+            $.post('/firmwareManager/firmware/intoWorkMode',{machineCode:machineCode},function(result){
+                if(result && result.success){
+                    layer.msg('机器码'+machineCode+'的设备已进入应用模式');
+                }else{
+                    layer.msg(result.errorInfo);
+                }
+            })
+        }
     }
     function firmwareUpgrade(){
         var machineCode = $("#machineCode").val();
     }
+    //固件升级开始,并回调显示进度
+    function submitBtn(){
+        $('#progressbar').progressbar('setValue', 0);
+        if(validMachineCode()){
+            var form = $("#form1");
+            var options  = {
+                url:'${pageContext.request.contextPath}/firmware/upload',
+                type:'post',
+                success:function(result)
+                {
+                    if(result.success){
+                        layer.msg('文件上传完成,马上开始固件升级');
+                        progressbarChange(result.data.firmwareCount);
+                    }else{
+                        layer.msg(result.errorInfo)
+                    }
+                }
+            };
+            form.ajaxSubmit(options);
+        }
+    }
     //校验机器码
-    function validMachineCode(machineCode){
+    function validMachineCode(){
+        var machineCode = $("#machineCode").val();
         if(machineCode==null || machineCode.trim()==""){
             layer.msg("机器码不能为空");
             return false;
         }
         return true;
+    }
+    //进度条展示
+    function progressbarChange(firmwareCount){
+        var totalCount = firmwareCount;
+        $('#progressbar').progressbar('setValue', 1);
+        //请求当前发送进度
+        var progressbarInterval = setInterval(function(){
+            var progressbarValue = $('#progressbar').progressbar('getValue');
+            $.post(
+                '/firmwareManager/firmware/getProgressbar',
+                {},
+                function(result){
+                    if(result.success){
+                        $('#progressbar').progressbar('setValue', (result.data.progressbarValue/totalCount)*100);
+                        if(progressbarValue>=100){
+                            layer.msg('升级完成');
+                            clearInterval(progressbarInterval);
+                        }
+                    }else{
+                        layer.msg(result.errorInfo);
+                    }
+                }
+            );
+        }, 1000);
     }
 </script>
 </body>
