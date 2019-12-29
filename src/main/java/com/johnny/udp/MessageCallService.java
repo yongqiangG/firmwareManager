@@ -1,12 +1,11 @@
 package com.johnny.udp;
 
 import com.johnny.udp.cache.MsgCache;
-import com.johnny.utils.FirmwareUtil;
+import com.johnny.udp.cache.ServiceMessageCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
+
 import java.util.Date;
-import java.util.List;
 
 public class MessageCallService {
 
@@ -106,8 +105,11 @@ public class MessageCallService {
         MsgCache.sendPCCurrentIndex = 1;
         if("0".equals(seq)){
             //当接收到第一条72数据时开启发送线程
+            String machineCode = getMacCode(msg);
+            String ip = ServiceMessageCache.getIpByMac(machineCode);
+            int port = ServiceMessageCache.getPort(Long.parseLong(machineCode));
             logger.info("接收到第一条72返回,开启线程");
-            new LogicMsgPCSenderThread(msg).start();
+            new LogicMsgPCSenderThread(msg,ip,port,machineCode).start();
         }
     }
 
@@ -177,9 +179,15 @@ public class MessageCallService {
 class LogicMsgPCSenderThread extends Thread {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private String msg;
+    private String machineCode;
+    private String machineIp;
+    private int machinePort;
 
-    public LogicMsgPCSenderThread(String msg) {
+    public LogicMsgPCSenderThread(String msg,String machineIp,int machinePort,String machineCode) {
         this.msg = msg;
+        this.machineIp = machineIp;
+        this.machinePort = machinePort;
+        this.machineCode = machineCode;
     }
 
 
@@ -203,21 +211,16 @@ class LogicMsgPCSenderThread extends Thread {
 
     public void run() {
         Long t1 = System.currentTimeMillis();
-        String macCode = Long.parseLong(msg.substring(40, 48), 16) + "";
-        String ip="192.168.1.50";
-        int port=3341;
-        List list = FirmwareUtil.getLines(new File("E:\\johnny\\TK3100.hex"));
-        List list1 = FirmwareUtil.transToList(list);
-        List<String> list2 = FirmwareUtil.TransToUdp(list1);
         int sendErrorCount = 0;
-        for(int i=0;i<list2.size();i++){
-            String s = list2.get(i);
+        for(int i=0;i<ServiceMessageCache.firmwareDataList.size();i++){
+            String s = ServiceMessageCache.firmwareDataList.get(i);
             while(true){
                 if(sendErrorCount>3){
                     //重发四次无响应
                     return;
                 }
-                MessageSender.sendLogicTableRowDataPC(macCode,ip,port,s);
+                //发送第二条固件升级数据
+                MessageSender.sendLogicTableRowDataPC(i+1,machineCode,machineIp,machinePort,s);
                 MsgCache.sendPCCurrentIndex=0;
                 MsgCache.sendSuccessCount++;
                 logger.info("已发送第"+i+"条固件数据");
@@ -228,7 +231,7 @@ class LogicMsgPCSenderThread extends Thread {
             }
         }
         //发送结束指令
-        MessageSender.sendFirmwareUpgradeEnd(macCode,ip,3341);
+        MessageSender.sendFirmwareUpgradeEnd(machineCode,machineIp,machinePort);
         MsgCache.clearSend();
         Long t2 = System.currentTimeMillis();
         logger.info("总耗时={}",t2-t1);

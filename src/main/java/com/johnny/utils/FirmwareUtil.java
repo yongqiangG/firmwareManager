@@ -113,7 +113,6 @@ public class FirmwareUtil {
             for(int j=0;j<16;j++){
                 if((i*16+j+1)>list.size()){
                     flag = true;
-                    System.out.println("i="+i+",j="+j);
                     break;
                 }
                 sb.append(list.get(i*16+j)+"-");
@@ -123,7 +122,6 @@ public class FirmwareUtil {
                 break;
             }
         }
-        System.out.println(list1.get(list1.size()-1));
         return list1;
     }
     //转换成我们需要发送的udp数据包

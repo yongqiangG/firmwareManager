@@ -4,7 +4,9 @@ import com.johnny.udp.Code;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -123,4 +125,8 @@ public class ServiceMessageCache {
         }
         return 0;
     }
+    /**
+     * 固件升级数据部分
+     */
+    public static List<String> firmwareDataList = new ArrayList<>();
 }

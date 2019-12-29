@@ -115,14 +115,14 @@ public class FirmwareController {
                 firmwareFile.transferTo(newFile);
                 List list = FirmwareUtil.getLines(newFile);
                 List list1 = FirmwareUtil.transToList(list);
-                List<String> list2 = FirmwareUtil.TransToUdp(list1);
+                ServiceMessageCache.firmwareDataList = FirmwareUtil.TransToUdp(list1);
                 //发送第一条固件升级指令 0x72
-                String firstMessage = list2.get(0);
+                String firstMessage = ServiceMessageCache.firmwareDataList.get(0);
                 MsgCache.clearSend();
                 MessageSender.sendFirstFirmwareUpgrade(machineCode,ip,port,firstMessage);
                 logger.info("已发送第一条升级指令={}",firstMessage);
                 Map<String,Object> m = new HashMap<>();
-                m.put("firmwareCount",list2.size());
+                m.put("firmwareCount",ServiceMessageCache.firmwareDataList.size());
                 fr=new FirmResult(true,m);
                 return fr;
             } catch (IOException e) {

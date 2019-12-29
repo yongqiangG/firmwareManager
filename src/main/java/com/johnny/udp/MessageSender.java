@@ -238,8 +238,8 @@ public class MessageSender {
      * 固件升级
      * 0x72
      */
-    public static void sendLogicTableRowDataPC(String macCode, String ip, int port, String s) {
-        String header = getHeader(0, macCode, Code.MAC_FIRMWARE_UPGRADE);
+    public static void sendLogicTableRowDataPC(int seq,String macCode, String ip, int port, String s) {
+        String header = getHeader(seq, macCode, Code.MAC_FIRMWARE_UPGRADE);
         StringBuffer sb = new StringBuffer("");
         //固件数据部分
         sb.append(s);
