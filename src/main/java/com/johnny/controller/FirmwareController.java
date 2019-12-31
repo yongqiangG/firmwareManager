@@ -141,7 +141,6 @@ public class FirmwareController {
     public FirmResult getProgressbar(){
         FirmResult fr;
         Map<String,Object> m = new HashMap<>();
-        MsgCache.sendSuccessCount+=20;
         m.put("progressbarValue", MsgCache.sendSuccessCount);
         fr=new FirmResult(true,m);
         return fr;

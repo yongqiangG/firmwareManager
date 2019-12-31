@@ -43,8 +43,24 @@ public class MessageSender {
         StringBuffer result = new StringBuffer();
         int contentLength = content.length() / 2 + 1; //存储长度的1位byte
         int total = header.length() / 2 + contentLength + 2 + 2;// crc两位byte  头长度2位byte
-        String totalStr = HexUtil.toHexString(total, 4);
+        String totalStr = HexUtil.toHexString(total, 2);
         result.append(totalStr + totalStr);
+        result.append(header);//头部 0-23
+        result.append(HexUtil.toHexString(contentLength, 2));//记录长度
+        result.append(content);
+        int crc = CRC16.ccr16(result.toString());
+        result.append(HexUtil.toHexString(crc, 4));
+        return result.toString();
+    }
+    //发送固件数据专用,固件数据较长
+    private static String firmwareToMsg(String header, String content) {
+        StringBuffer result = new StringBuffer();
+        int contentLength = content.length() / 2 + 1; //存储长度的1位byte
+        int total = header.length() / 2 + contentLength + 2 + 2;// crc两位byte  头长度2位byte
+        //len帧长度计算
+        String totalStr = HexUtil.toHexString(total, 4);
+        //固件数据长度超过ff,当做ff
+        result.append("ff" + "ff");
         result.append(header);//头部 0-23
         result.append(HexUtil.toHexString(contentLength, 4));//记录长度
         result.append(content);
@@ -182,22 +198,6 @@ public class MessageSender {
         }
     }
 
-    /**
-     * 固件升级结束指令
-     * 0x76
-     */
-    public static void sendFirmwareUpgradeEnd(String macCode, String ip,int port) {
-        String header = getHeader(0, macCode, Code.MAC_FIRMWARE_UPGRADE_END);
-        StringBuffer sb = new StringBuffer("");
-        String content = sb.toString();
-        content = toMsg(header, content);
-        try {
-            MessageSender.sendMsg(ip, port,content);
-            logger.info("固件升级结束发送指令={}", content);
-        } catch (Exception e) {
-            logger.error("发送0x76指令出错了={}", e.getMessage());
-        }
-    }
 
     /**
      * 发送使硬件进入应用模式
@@ -213,6 +213,80 @@ public class MessageSender {
             logger.info("已发送硬件进入应用模式指令={}", content);
         } catch (Exception e) {
             logger.error("发送0x77指令出错了={}", e.getMessage());
+        }
+    }
+
+    /**
+     * 应用端发送写信息数据到终端指令
+     * 0x78
+     */
+    public static void sendFirmwareInfoToMac(String macCode, String ip ,int port){
+        String header = getHeader(0, macCode, Code.FIRMWARE_INFO_TO_MAC);
+        StringBuffer sb = new StringBuffer("");
+        //TODO 填入固件信息数据
+
+        String content = sb.toString();
+        content = toMsg(header, content);
+        try {
+            MessageSender.sendMsg(ip, port,content);
+            logger.info("已发送0x78指令={}", content);
+        } catch (Exception e) {
+            logger.error("发送0x78指令出错了={}", e.getMessage());
+        }
+    }
+
+    /**
+     * 应用端发送校验数据到终端指令
+     * 0x0073
+     */
+    public static void sendMacCrcCheck(String macCode, String ip ,int port){
+        String header = getHeader(0, macCode, Code.MAC_CRC_CHECK);
+        StringBuffer sb = new StringBuffer("");
+        //TODO 填入CRC校验数据
+
+        String content = sb.toString();
+        content = toMsg(header, content);
+        try {
+            MessageSender.sendMsg(ip, port,content);
+            logger.info("已发送0x73指令={}", content);
+        } catch (Exception e) {
+            logger.error("发送0x73指令出错了={}", e.getMessage());
+        }
+    }
+
+
+    /**
+     * 应用端发送固件数据加密指令
+     * 0x0074
+     */
+    public static void sendMacFirmwareEncryption(String macCode, String ip ,int port){
+        String header = getHeader(0, macCode, Code.MAC_FIRMWARE_ENCRYPTION);
+        StringBuffer sb = new StringBuffer("");
+        String content = sb.toString();
+        content = toMsg(header, content);
+        try {
+            MessageSender.sendMsg(ip, port,content);
+            logger.info("已发送0x74指令={}", content);
+        } catch (Exception e) {
+            logger.error("发送0x74指令出错了={}", e.getMessage());
+        }
+    }
+
+
+    /**
+     * 应用端发送固件升级结束指令
+     * 0x0076
+     */
+    public static void sendMacFirmwareUpgradeEnd(String macCode, String ip ,int port){
+        String header = getHeader(0, macCode, Code.MAC_FIRMWARE_UPGRADE_END);
+        StringBuffer sb = new StringBuffer("");
+        String content = sb.toString();
+        content = toMsg(header, content);
+        try {
+            MessageSender.sendMsg(ip, port,content);
+            logger.info("已发送0x76指令={}", content);
+        } catch (Exception e) {
+            logger.error("发送0x76指令出错了={}", e.getMessage());
         }
     }
 
@@ -244,7 +318,7 @@ public class MessageSender {
         //固件数据部分
         sb.append(s);
         String content = new String(sb);
-        content = toMsg(header, content);
+        content = firmwareToMsg(header, content);
         sendMsg(ip, port,content, macCode, 0, Code.MAC_FIRMWARE_UPGRADE);
     }
     /**
@@ -257,7 +331,7 @@ public class MessageSender {
         //固件数据部分
         sb.append(s);
         String content = new String(sb);
-        content = toMsg(header, content);
+        content = firmwareToMsg(header, content);
         sendMsg(ip, port,content, macCode, 0, Code.MAC_FIRMWARE_UPGRADE);
     }
 

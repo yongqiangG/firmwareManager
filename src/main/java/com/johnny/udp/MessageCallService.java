@@ -38,7 +38,7 @@ public class MessageCallService {
                 break;
             case Code.MAC_FIRMWARE_UPGRADE:
                 //0x72
-                //sendMacFirmwareUpgrade(msg);
+                sendMacFirmwareUpgrade(msg);
                 break;
             case Code.MAC_FIRMWARE_UPGRADE_END:
                 //0x76
@@ -83,9 +83,13 @@ public class MessageCallService {
     }
 
     private void sendMacResetShake(String msg, UdpClientSocket client) {
-        //接收到主机复位重启的0x70指令
         //获取设备机器码
-        String macCode = getMacCode(msg);
+        String machineCode = getMacCode(msg);
+        String ip = ServiceMessageCache.getIpByMac(machineCode);
+        int port = ServiceMessageCache.getPort(Long.parseLong(machineCode));
+        //接收到主机复位重启的0x70指令
+        MessageSender.sendMacResetShake(machineCode,ip,port);
+
     }
 
     private void getMacReadyShake(String msg) {
@@ -231,7 +235,10 @@ class LogicMsgPCSenderThread extends Thread {
             }
         }
         //发送结束指令
-        MessageSender.sendFirmwareUpgradeEnd(machineCode,machineIp,machinePort);
+        MessageSender.sendFirmwareInfoToMac(machineCode,machineIp,machinePort);
+        MessageSender.sendMacCrcCheck(machineCode,machineIp,machinePort);
+        MessageSender.sendMacFirmwareEncryption(machineCode,machineIp,machinePort);
+        MessageSender.sendMacFirmwareUpgradeEnd(machineCode,machineIp,machinePort);
         MsgCache.clearSend();
         Long t2 = System.currentTimeMillis();
         logger.info("总耗时={}",t2-t1);

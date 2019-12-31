@@ -28,6 +28,9 @@ public class Code {
     //应用端发送终端进入应用模式指令
     public static final int MAC_TO_WORK = 0x77;
 
+    //应用端发送写信息数据到终端指令
+    public static final int FIRMWARE_INFO_TO_MAC = 0x78;
+
     //终端机器码修改设置指令
     public static final int MAC_CODE_MODIFY = 0x79;
 
