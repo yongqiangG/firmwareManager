@@ -165,7 +165,7 @@ public class MessageCallService {
      * 判断报文号
      */
     private static String getSeq(String msg) {
-        String code = msg.substring(20, 22);
+        String code = msg.substring(20, 24);
         return Long.parseLong(code, 16) + "";
     }
 
@@ -203,12 +203,12 @@ class LogicMsgPCSenderThread extends Thread {
     private static boolean checkRCUback() {
         int waitCount = 0;
         while (true) {
-            if (waitCount == 20) return false;
+            if (waitCount == 10) return false;
             if (MsgCache.sendPCCurrentIndex == 1) {
                 return true;
             }
             MsgCache.upMsgTime = new Date().getTime();
-            MsgCache.ThreadSleep(200);//每1000毫秒监测是否恢复信息啦
+            MsgCache.ThreadSleep(50);//每1000毫秒监测是否恢复信息啦
             waitCount++;
         }
     }
@@ -216,7 +216,11 @@ class LogicMsgPCSenderThread extends Thread {
     public void run() {
         Long t1 = System.currentTimeMillis();
         int sendErrorCount = 0;
-        for(int i=0;i<ServiceMessageCache.firmwareDataList.size();i++){
+        //从第二条72数据开始发
+        for(int i=1;i<ServiceMessageCache.firmwareDataList.size();i++){
+            if(MsgCache.stopFirmwareUpgrade==1){
+                break;
+            }
             String s = ServiceMessageCache.firmwareDataList.get(i);
             while(true){
                 if(sendErrorCount>3){
@@ -224,10 +228,9 @@ class LogicMsgPCSenderThread extends Thread {
                     return;
                 }
                 //发送第二条固件升级数据
-                MessageSender.sendLogicTableRowDataPC(i+1,machineCode,machineIp,machinePort,s);
+                MessageSender.sendLogicTableRowDataPC(i,machineCode,machineIp,machinePort,s);
                 MsgCache.sendPCCurrentIndex=0;
                 MsgCache.sendSuccessCount++;
-                logger.info("已发送第"+i+"条固件数据");
                 if (checkRCUback()) {
                     break;
                 }
@@ -235,10 +238,18 @@ class LogicMsgPCSenderThread extends Thread {
             }
         }
         //发送结束指令
-        MessageSender.sendFirmwareInfoToMac(machineCode,machineIp,machinePort);
-        MessageSender.sendMacCrcCheck(machineCode,machineIp,machinePort);
-        MessageSender.sendMacFirmwareEncryption(machineCode,machineIp,machinePort);
-        MessageSender.sendMacFirmwareUpgradeEnd(machineCode,machineIp,machinePort);
+        try{
+            MessageSender.sendFirmwareInfoToMac(machineCode,machineIp,machinePort);
+            Thread.sleep(500);
+            MessageSender.sendMacCrcCheck(machineCode,machineIp,machinePort);
+            Thread.sleep(500);
+            MessageSender.sendMacFirmwareEncryption(machineCode,machineIp,machinePort);
+            Thread.sleep(500);
+            MessageSender.sendMacFirmwareUpgradeEnd(machineCode,machineIp,machinePort);
+            Thread.sleep(500);
+        }catch(Exception e){
+            logger.error(e.getMessage());
+        }
         MsgCache.clearSend();
         Long t2 = System.currentTimeMillis();
         logger.info("总耗时={}",t2-t1);

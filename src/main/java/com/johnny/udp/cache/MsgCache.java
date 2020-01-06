@@ -161,7 +161,33 @@ public class MsgCache {
      * 0 开始  1结束
      */
     public static int isEnd = 0;
+    /**
+     * 发送的固件校验值,十进制
+     */
+    public static Long firmwareCRC32=0L;
+
+    /**
+     * 发送的固件起始地址
+     */
+    public static String firmwareStartAddr="00800008";
+    /**
+     * 发送的固件起始地址
+     */
+    public static String firmwareStartAddrInfo="e0ff0300";
+
+    /**
+     * 发送固件数据长度,十进制
+     */
+    public static int firmwareLength = 0;
+
+    /**
+     * 停止固件升级
+     */
+    public static int stopFirmwareUpgrade = 0;
+
+
     public static void clearSend(){
+        stopFirmwareUpgrade = 0;
         sendToStop=0;
         sendCount=0;
         sendSuccessCount=0;

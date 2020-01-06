@@ -60,6 +60,9 @@ public class HexUtil {
     public static String hex2Number(String s) {
         return Long.parseLong(s, 16) + "";
     }
+    public static Long hex2Number1(String s) {
+        return Long.parseLong(s, 16);
+    }
 
     public static String toHexString(long number, int length) {
         String n = Long.toHexString(number);

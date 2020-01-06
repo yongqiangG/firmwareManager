@@ -2,6 +2,7 @@ package com.johnny.udp;
 
 import com.johnny.udp.cache.MsgCache;
 import com.johnny.utils.CRC16;
+import com.johnny.utils.FirmwareUtil;
 import com.johnny.utils.HexUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,7 @@ public class MessageSender {
     //发送固件数据专用,固件数据较长
     private static String firmwareToMsg(String header, String content) {
         StringBuffer result = new StringBuffer();
-        int contentLength = content.length() / 2 + 1; //存储长度的1位byte
+        int contentLength = content.length() / 2 + 2; //存储长度的1位byte
         int total = header.length() / 2 + contentLength + 2 + 2;// crc两位byte  头长度2位byte
         //len帧长度计算
         String totalStr = HexUtil.toHexString(total, 4);
@@ -223,8 +224,15 @@ public class MessageSender {
     public static void sendFirmwareInfoToMac(String macCode, String ip ,int port){
         String header = getHeader(0, macCode, Code.FIRMWARE_INFO_TO_MAC);
         StringBuffer sb = new StringBuffer("");
-        //TODO 填入固件信息数据
-
+        sb.append(MsgCache.firmwareStartAddrInfo);
+        sb.append(MsgCache.firmwareStartAddr);
+        //长度高低字节调换
+        String str1 = HexUtil.toHexString(MsgCache.firmwareLength,8);
+        sb.append(FirmwareUtil.exchangeHighLow1(str1));
+        String str2 = HexUtil.toHexString(MsgCache.firmwareCRC32,8);
+        sb.append(FirmwareUtil.exchangeHighLow1(str2));
+        //固件版本号 TODO
+        sb.append("00010000");
         String content = sb.toString();
         content = toMsg(header, content);
         try {
@@ -243,6 +251,13 @@ public class MessageSender {
         String header = getHeader(0, macCode, Code.MAC_CRC_CHECK);
         StringBuffer sb = new StringBuffer("");
         //TODO 填入CRC校验数据
+        sb.append(MsgCache.firmwareStartAddr);
+        //长度高低字节调换
+        String str1 = HexUtil.toHexString(MsgCache.firmwareLength,8);
+        sb.append(FirmwareUtil.exchangeHighLow1(str1));
+        String str2 = HexUtil.toHexString(MsgCache.firmwareCRC32,8);
+        sb.append(FirmwareUtil.exchangeHighLow1(str2));
+        // TODO
 
         String content = sb.toString();
         content = toMsg(header, content);
@@ -319,6 +334,7 @@ public class MessageSender {
         sb.append(s);
         String content = new String(sb);
         content = firmwareToMsg(header, content);
+        logger.info("已发送第"+(seq+1)+"条固件数据={}",content);
         sendMsg(ip, port,content, macCode, 0, Code.MAC_FIRMWARE_UPGRADE);
     }
     /**
@@ -332,8 +348,8 @@ public class MessageSender {
         sb.append(s);
         String content = new String(sb);
         content = firmwareToMsg(header, content);
+        logger.info("已发送第一条升级指令={}",content);
         sendMsg(ip, port,content, macCode, 0, Code.MAC_FIRMWARE_UPGRADE);
     }
-
 
 }

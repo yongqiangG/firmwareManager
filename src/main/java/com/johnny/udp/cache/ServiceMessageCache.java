@@ -75,7 +75,7 @@ public class ServiceMessageCache {
     /**
      * mac与ip端口映射关系
      */
-    private static Map<Long, String> MapIPPort = new ConcurrentHashMap<Long, String>();
+    public static Map<Long, String> MapIPPort = new ConcurrentHashMap<Long, String>();
     /**
      * 更新mac与ip端口对应关系
      */

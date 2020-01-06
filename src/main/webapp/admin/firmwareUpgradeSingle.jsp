@@ -91,6 +91,19 @@
 
             <tr>
                 <td></td>
+                <td><a href="javascript:submitBtnInitiative()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">主动固件升级</a></td>
+                <td width="80px">发送间隔:</td>
+                <td><input type="text" id="sendInterval" name="sendInterval" style="width:200px;" placeholder="发送间隔为1-9999毫秒"/></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><a href="javascript:stopFirmwareUpgrade()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">停止固件升级</a></td>
+                <td id="stopInfo"></td>
+            </tr>
+
+            <tr>
+                <td></td>
                 <td><div id="progressbar" class="easyui-progressbar" data-options="value:0" style="width:400px;"></div></td>
                 <td id="progressbarInfo"></td>
             </tr>
@@ -197,6 +210,44 @@
                 }
             );
         }, 1000);
+    }
+
+    //主动固件升级
+    function submitBtnInitiative(){
+        if($("#sendInterval").val()==""||$("#sendInterval").val()==null){
+            layer.msg("发送间隔不能为空");
+            return;
+        }
+        if(validMachineCode()){
+            var form = $("#form1");
+            var options  = {
+                url:'${pageContext.request.contextPath}/firmware/uploadInitiative',
+                type:'post',
+                success:function(result)
+                {
+                    if(result.success){
+                        layer.msg('文件上传完成,马上开始固件升级');
+                    }else{
+                        layer.msg(result.errorInfo)
+                    }
+                }
+            };
+            form.ajaxSubmit(options);
+        }
+    }
+
+    //停止固件升级
+    function stopFirmwareUpgrade(){
+        var machineCode = $("#machineCode").val();
+        if(validMachineCode()){
+            $.post('/firmwareManager/firmware/stopFirmwareUpgrade',{machineCode:machineCode},function(result){
+                if(result && result.success){
+                    layer.msg('机器码'+machineCode+'固件升级已停止');
+                }else{
+                    layer.msg(result.errorInfo);
+                }
+            })
+        }
     }
 </script>
 </body>
