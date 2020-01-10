@@ -21,7 +21,9 @@ public class UdpClientSocket {
      * @throws Exception
      */
     public UdpClientSocket() throws Exception {
-        ds = new DatagramSocket();
+        if(ds==null || ds.isClosed()){
+            ds = new DatagramSocket();
+        }
     }
 
     /**
@@ -37,9 +39,9 @@ public class UdpClientSocket {
                                      final byte[] bytes) throws IOException {
         DatagramPacket dp = new DatagramPacket(bytes, bytes.length, InetAddress
                 .getByName(host), port);
-        //UdpServer.datagramSocket.send(dp);
-        ds.send(dp);
-        //ds.send(dp);
+        System.out.println("发送端端口"+ds.getLocalPort());
+        System.out.println("接收端端口"+ds.getPort());
+        UdpServer.datagramSocket.send(dp);
         return dp;
     }
 

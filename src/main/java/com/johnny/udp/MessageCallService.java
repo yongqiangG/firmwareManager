@@ -38,6 +38,11 @@ public class MessageCallService {
                 break;
             case Code.MAC_FIRMWARE_UPGRADE:
                 //0x72
+                if(getReady(msg)){
+                    logger.info("硬件回复ready,接收到的数据"+msg);
+                }else{
+                    logger.info("硬件回复error,接收到的数据:"+msg);
+                }
                 sendMacFirmwareUpgrade(msg);
                 break;
             case Code.MAC_FIRMWARE_UPGRADE_END:
@@ -54,7 +59,12 @@ public class MessageCallService {
                 break;
             case Code.MAC_RESET_SHAKE:
                 //0x70
-                sendMacResetShake(msg, client);
+                if(MsgCache.machineCodeTo70.equals(getMacCode(msg))){
+                    logger.info("监测到指定机器码"+MsgCache.machineCodeTo70+"的70指令,即将反馈进入烧写模式");
+                    sendMacResetShake(msg, client);
+                }
+                //sendMacResetShake(msg, client);
+                logger.info("屏蔽非指定机器码"+getMacCode(msg)+"进入烧写模式");
                 break;
             case Code.MAC_TO_WORK:
                 //0x71
@@ -90,6 +100,7 @@ public class MessageCallService {
         //接收到主机复位重启的0x70指令
         MessageSender.sendMacResetShake(machineCode,ip,port);
 
+
     }
 
     private void getMacReadyShake(String msg) {
@@ -106,7 +117,11 @@ public class MessageCallService {
 
     private void sendMacFirmwareUpgrade(String msg) {
         String seq = getSeq(msg);
-        MsgCache.sendPCCurrentIndex = 1;
+        if(getReady(msg)){
+            MsgCache.sendPCCurrentIndex = 1;
+        }else{
+            logger.info("硬件未回复ready,接收到的数据:"+msg);
+        }
         if("0".equals(seq)){
             //当接收到第一条72数据时开启发送线程
             String machineCode = getMacCode(msg);
@@ -169,6 +184,18 @@ public class MessageCallService {
         return Long.parseLong(code, 16) + "";
     }
 
+    /**
+     * 判断是否回复成功
+     * @param msg
+     * @return
+     */
+    public static boolean getReady(String msg){
+        String readyMsg = msg.substring(50,60);
+        if("5245414459".equals(readyMsg)){
+            return true;
+        }
+        return false;
+    }
 
     private static String getMsgContent(String msg) {
         return msg.substring(50, msg.length() - 4);
@@ -203,12 +230,12 @@ class LogicMsgPCSenderThread extends Thread {
     private static boolean checkRCUback() {
         int waitCount = 0;
         while (true) {
-            if (waitCount == 10) return false;
+            if (waitCount == 100) return false;
             if (MsgCache.sendPCCurrentIndex == 1) {
                 return true;
             }
             MsgCache.upMsgTime = new Date().getTime();
-            MsgCache.ThreadSleep(50);//每1000毫秒监测是否恢复信息啦
+            MsgCache.ThreadSleep(20);//每1000毫秒监测是否恢复信息啦
             waitCount++;
         }
     }
@@ -240,17 +267,18 @@ class LogicMsgPCSenderThread extends Thread {
         //发送结束指令
         try{
             MessageSender.sendFirmwareInfoToMac(machineCode,machineIp,machinePort);
-            Thread.sleep(500);
+            Thread.sleep(300);
             MessageSender.sendMacCrcCheck(machineCode,machineIp,machinePort);
-            Thread.sleep(500);
+            Thread.sleep(300);
             MessageSender.sendMacFirmwareEncryption(machineCode,machineIp,machinePort);
-            Thread.sleep(500);
+            Thread.sleep(300);
             MessageSender.sendMacFirmwareUpgradeEnd(machineCode,machineIp,machinePort);
-            Thread.sleep(500);
+            Thread.sleep(300);
         }catch(Exception e){
             logger.error(e.getMessage());
         }
         MsgCache.clearSend();
+        MsgCache.successUpgrade = 1;
         Long t2 = System.currentTimeMillis();
         logger.info("总耗时={}",t2-t1);
     }

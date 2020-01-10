@@ -10,6 +10,15 @@ public class Machine {
     private String machinePort;
     private Date createTime;
 
+    public Machine(Long machineId, Long machineCode, int hotelId, String machineIp, String machinePort, Date createTime) {
+        this.machineId = machineId;
+        this.machineCode = machineCode;
+        this.hotelId = hotelId;
+        this.machineIp = machineIp;
+        this.machinePort = machinePort;
+        this.createTime = createTime;
+    }
+
     public Long getMachineId() {
         return machineId;
     }

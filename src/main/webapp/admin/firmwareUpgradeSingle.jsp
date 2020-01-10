@@ -68,6 +68,10 @@
                 <td><input type="text" id="machinePort" name="machinePort" style="width:200px;" value="${machinePort}" readonly="readonly"/></td>
             </tr>
             <tr>
+                <td width="80px">硬件模式</td>
+                <td><input type="text" id="machineMode" name="machineMode" style="width:200px;" value="${machineMode}" readonly="readonly"/></td>
+            </tr>
+            <tr>
                 <td></td>
                 <td><a href="javascript:getIpAndPort()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">获取设备IP端口</a></td>
                 <td id="getIpAndPortInfo"></td>
@@ -89,12 +93,13 @@
                 <td id="submitInfo"></td>
             </tr>
 
-            <tr>
+            <!--设备主动升级模式,该模式无视硬件回复,持续的以相应的时间间隔向硬件发送UDP升级指令-->
+            <%--<tr>
                 <td></td>
                 <td><a href="javascript:submitBtnInitiative()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">主动固件升级</a></td>
                 <td width="80px">发送间隔:</td>
                 <td><input type="text" id="sendInterval" name="sendInterval" style="width:200px;" placeholder="发送间隔为1-9999毫秒"/></td>
-            </tr>
+            </tr>--%>
 
             <tr>
                 <td></td>
@@ -135,7 +140,7 @@
         if(validMachineCode()){
             $.post('/firmwareManager/firmware/intoUpgradeMode',{machineCode:machineCode},function(result){
                 if(result && result.success){
-                    layer.msg('机器码'+machineCode+'的设备已进入烧写模式');
+                    layer.msg('机器码'+machineCode+'的设备已准备进入烧写模式');
                 }else{
                     layer.msg(result.errorInfo);
                 }
@@ -147,15 +152,12 @@
         if(validMachineCode()){
             $.post('/firmwareManager/firmware/intoWorkMode',{machineCode:machineCode},function(result){
                 if(result && result.success){
-                    layer.msg('机器码'+machineCode+'的设备已进入应用模式');
+                    layer.msg('机器码'+machineCode+'的设备已准备进入应用模式');
                 }else{
                     layer.msg(result.errorInfo);
                 }
             })
         }
-    }
-    function firmwareUpgrade(){
-        var machineCode = $("#machineCode").val();
     }
     //固件升级开始,并回调显示进度
     function submitBtn(){
@@ -190,7 +192,8 @@
     //进度条展示
     function progressbarChange(firmwareCount){
         var totalCount = firmwareCount;
-        $('#progressbar').progressbar('setValue', 1);
+        $('#progressbar').progressbar('setValue', 0);
+        $("#progressbarInfo").html('升级中');
         //请求当前发送进度
         var progressbarInterval = setInterval(function(){
             var progressbarValue = $('#progressbar').progressbar('getValue');
@@ -200,8 +203,8 @@
                 function(result){
                     if(result.success){
                         $('#progressbar').progressbar('setValue', (result.data.progressbarValue/totalCount)*100);
-                        if(progressbarValue>=100){
-                            layer.msg('升级完成');
+                        if(result.data.successUpgrade==1){
+                            $("#progressbarInfo").html('升级完成');
                             clearInterval(progressbarInterval);
                         }
                     }else{
@@ -213,7 +216,7 @@
     }
 
     //主动固件升级
-    function submitBtnInitiative(){
+    /*function submitBtnInitiative(){
         if($("#sendInterval").val()==""||$("#sendInterval").val()==null){
             layer.msg("发送间隔不能为空");
             return;
@@ -234,7 +237,7 @@
             };
             form.ajaxSubmit(options);
         }
-    }
+    }*/
 
     //停止固件升级
     function stopFirmwareUpgrade(){
@@ -249,6 +252,47 @@
             })
         }
     }
+
+    //硬件模式转换 0:等待模式,1:烧写模式,2:应用模式,-1:未获取到该设备
+    function transMode(mode) {
+        if(mode==0){
+            return '等待模式';
+        }else if(mode==1){
+            return '烧写模式';
+        }else if(mode==2){
+            return '应用模式';
+        }else if(mode==-1){
+            return '未获取到硬件信息';
+        }else{
+            return '数据异常';
+        }
+    }
+
+    //获取硬件状态
+    function changeMachineMode(){
+        var machineCode = $("#machineCode").val();
+        var machineMode = $("#machineMode");
+        if(machineCode!="" && machineCode!=null){
+            $.post(
+                '/firmwareManager/firmware/getMachineMode',
+                {machineCode:machineCode},
+                function(result){
+                    if(result.success){
+                        var mode = result.data.machineMode;
+                        var modeInfo = transMode(mode);
+                        machineMode.val(modeInfo);
+                    }
+                }
+            )
+        }
+    }
+
+    $(function(){
+        //获取模式
+        var machineModeInterval = setInterval(function(){
+            changeMachineMode();
+        },1000)
+    })
 </script>
 </body>
 </html>

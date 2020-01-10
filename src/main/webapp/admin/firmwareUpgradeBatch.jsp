@@ -24,25 +24,26 @@
     </script>
 </head>
 <body style="margin: 1px; font-family: microsoft yahei">
-<table id="dg" title="博客管理" class="easyui-datagrid" fitcolumns="true" pagination="true" rownumbers="true"
+<table id="dg" title="设备管理" class="easyui-datagrid" fitcolumns="true" pagination="true" rownumbers="true"
        url="/firmwareManager/firmware/machineList" fit="true" toolbar="#tb">
     <thead>
     <tr>
         <th field="cb" checkbox="true" align="center"></th>
-        <th field="id" width="20" align="center">编号</th>
-        <th field="title" width="200" align="center" >博客标题</th>
-        <th field="releaseDate" width="50" align="center">发布日期</th>
-        <th field="blogType" width="50" align="center" >博客类型</th>
+        <th field="machineId" width="20" align="center">编号</th>
+        <th field="machineCode" width="200" align="center" >机器码</th>
+        <th field="machineIp" width="50" align="center">IP</th>
+        <th field="machinePort" width="50" align="center" >端口</th>
+        <th field="hotelId" width="50" align="center" >酒店ID</th>
     </tr>
     </thead>
 </table>
 <div id="tb">
     <div>
-        <a href="javascript:openModifyBlogTab()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改博客</a>
-        <a href="javascript:deleteBlog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除博客</a>
+        <a href="javascript:openModifyBlogTab()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+        <a href="javascript:deleteBlog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
     </div>
     <div>
-        &nbsp;根据标题检索:&nbsp;<input type="text" id="searchByTitle" size="20" onkeydown="if(event.KeyCode=13) searchBlogByTitle()"/>
+        &nbsp;根据机器码检索:&nbsp;<input type="text" id="searchByTitle" size="20" onkeydown="if(event.KeyCode=13) searchBlogByTitle()"/>
         <a href="javascript:searchBlogByTitle()" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
     </div>
 </div>

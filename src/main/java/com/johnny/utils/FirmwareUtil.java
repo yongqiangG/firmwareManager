@@ -95,7 +95,10 @@ public class FirmwareUtil {
                     FirmwareUtil.fillDataStr(data);
                 }*/
                 //offset = lineAddress-firstAddress+offsetAdd;
+                //数据加密
                 list.add(firstAddress + "-" + lineAddress + "-" + data);
+                //数据不加密
+                //list.add(firstAddress + "-" + lineAddress + "-" + dataSource);
                 //判断结束
                 if (lineStr.startsWith(endLinePrefix)) {
                     break;
@@ -212,6 +215,9 @@ public class FirmwareUtil {
             String b1 = Long.toHexString(b-1);
             if(b1.length() == 1){
                 b1 = "0"+b1;
+            }
+            if(b1.length()>2){
+                b1 = "ff";
             }
             sb.append(b1);
         }

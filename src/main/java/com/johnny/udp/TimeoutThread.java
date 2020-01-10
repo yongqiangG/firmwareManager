@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TimeoutThread extends Thread {
@@ -20,20 +19,16 @@ public class TimeoutThread extends Thread {
         String msg = "";
         while (true) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(30);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.info("线程调用sleep()出现异常={}",e.getMessage());
             }
-            Date d = new Date();
-            long now = d.getTime();
             /**
              * 信息服务处理
              */
             try {
 
                 if (ServiceMessageCache.unSaveServiceMsg.size() == 0) continue;
-
-                //System.out.println("信息服务处理111");
                 if (callService == null) callService = new MessageCallService();
 
                 if (client == null) client = new UdpClientSocket();
@@ -62,7 +57,7 @@ public class TimeoutThread extends Thread {
                     delList.clear();
                 }
             } catch (Exception e) {
-                logger.info("出错啦={}",e.getMessage());
+                logger.info("消息处理异常={}",e.getMessage());
             }
         }
     }

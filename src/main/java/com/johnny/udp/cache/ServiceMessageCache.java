@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ServiceMessageCache {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    public static Logger logger = LoggerFactory.getLogger(ServiceMessageCache.class);
     /**
      * 等待处理的服务器服务信息列表
      * key : 自增长的长整形
@@ -77,19 +77,67 @@ public class ServiceMessageCache {
      */
     public static Map<Long, String> MapIPPort = new ConcurrentHashMap<Long, String>();
     /**
+     * mac与模式映射关系, 烧写模式 1, 应用模式 2, 等待模式 0
+     * 1.接收到7f指令表示该mac处于烧写模式
+     * 2.接收到0x30,0x88表示该mac处于应用模式
+     * 3.其余等待模式
+     */
+    public static Map<Long, Integer> MacModeMap = new ConcurrentHashMap<Long,Integer>();
+    /**
+     * 更新mac与模式对应关系
+     */
+    public static void refreshMacMode(String msg,int mode){
+        if(msg.length()<48)return;
+        String code =  msg.substring(40,48);
+        Long mac =  Long.parseLong(code,16);
+        if(MacModeMap.containsKey(mac)){
+            MacModeMap.remove(mac);
+            MacModeMap.put(mac,mode);
+            logger.info("更新硬件模式,机器码:"+mac+",Mode:"+mode);
+        }else{
+            //设备默认为等待状态
+            MacModeMap.put(mac,0);
+            logger.info("新增硬件模式,机器码:"+mac+",默认等待模式,等待硬件信息");
+        }
+    }
+    /**
      * 更新mac与ip端口对应关系
      */
     public static void RefreshIPPort(String msg,String ip,int port){
         if(msg.length()<48)return;
         String code =  msg.substring(40,48);
         Long mac =  Long.parseLong(code,16);
+        int cmd = getCommand(msg);
         if(MapIPPort.containsKey(mac)){
             MapIPPort.remove(mac);
             MapIPPort.put(mac, ip+"#"+port);
-            System.out.println("更新设备信息,mac:"+mac+",ip:"+ip+",port:"+port);
+            logger.info("***更新设备Ip端口信息***机器码:"+mac+",Ip:"+ip+",port:"+port);
+            if(cmd==0x7f){
+                MacModeMap.remove(mac);
+                MacModeMap.put(mac,1);
+                logger.info("更新硬件模式,机器码:"+mac+",Mode:烧写模式");
+            }else if(cmd==0x30 || cmd==0x88){
+                MacModeMap.remove(mac);
+                MacModeMap.put(mac,2);
+                logger.info("更新硬件模式,机器码:"+mac+",Mode:应用模式");
+            }
         }else{
             MapIPPort.put(mac, ip+"#"+port);
-            System.out.println("新增设备信息,mac:"+mac+",ip:"+ip+",port:"+port);
+            logger.info("---新增设备Ip端口信息---机器码:"+mac+",Ip:"+ip+",port:"+port);
+            MacModeMap.put(mac,0);
+            logger.info("新增硬件模式,机器码:"+mac+",默认为等待模式,直到接收到指定硬件信息");
+        }
+    }
+    /**
+     * 获取硬件模式
+     */
+    public static int getModeByMachine(String machineCode){
+        Long mac = Long.parseLong(machineCode);
+        if(MacModeMap.containsKey(mac)){
+            int mode = MacModeMap.get(mac);
+            return mode;
+        }else{
+            return -1;
         }
     }
 

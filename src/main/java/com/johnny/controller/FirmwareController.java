@@ -1,6 +1,7 @@
 package com.johnny.controller;
 
 import com.johnny.dto.FirmResult;
+import com.johnny.entity.Machine;
 import com.johnny.udp.MessageSender;
 import com.johnny.udp.cache.MsgCache;
 import com.johnny.udp.cache.ServiceMessageCache;
@@ -17,10 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/firmware")
@@ -46,6 +44,20 @@ public class FirmwareController {
         return fr;
     }
 
+    @RequestMapping("/getMachineMode")
+    @ResponseBody
+    public FirmResult getMachineMode(HttpServletRequest req){
+        String machineCode = req.getParameter("machineCode");
+        logger.info("getIpAndPort()获取到机器码={}",machineCode);
+        FirmResult fr;
+        Map<String,Object> m = new HashMap<String,Object>();
+        int machineMode = ServiceMessageCache.getModeByMachine(machineCode);
+        m.put("machineMode",machineMode);
+        fr = new FirmResult(true,m);
+        return fr;
+    }
+
+
     @RequestMapping(value = "/intoUpgradeMode")
     @ResponseBody
     public FirmResult intoUpgradeMode(HttpServletRequest req){
@@ -58,6 +70,8 @@ public class FirmwareController {
             fr=new FirmResult(false,"未获取到该设备的IP和端口,请检查网络后在尝试");
             return fr;
         }
+        //指定检测70指令的机器码
+        MsgCache.machineCodeTo70 = machineCode;
         //发送0x75指令使得主机复位重启
         MessageSender.sendFirmwareUpgradeStart(machineCode,ip,port);
         fr = new FirmResult(true);
@@ -120,6 +134,7 @@ public class FirmwareController {
                 //发送第一条固件升级指令 0x72
                 String firstMessage = ServiceMessageCache.firmwareDataList.get(0);
                 MsgCache.clearSend();
+                MsgCache.successUpgrade = 0;
                 MessageSender.sendFirstFirmwareUpgrade(machineCode,ip,port,firstMessage);
                 Map<String,Object> m = new HashMap<>();
                 m.put("firmwareCount",ServiceMessageCache.firmwareDataList.size());
@@ -142,6 +157,7 @@ public class FirmwareController {
         FirmResult fr;
         Map<String,Object> m = new HashMap<>();
         m.put("progressbarValue", MsgCache.sendSuccessCount);
+        m.put("successUpgrade",MsgCache.successUpgrade);
         fr=new FirmResult(true,m);
         return fr;
     }
@@ -200,7 +216,7 @@ public class FirmwareController {
                     //发送第二条固件升级数据
                     Thread.sleep(sendTime);
                     MessageSender.sendLogicTableRowDataPC(i+1,machineCode,ip,port,s);
-                    logger.info("***主动模式***已发送第"+(i+1)+"条固件数据={}",s);
+                    //logger.info("***主动模式***已发送第"+(i+1)+"条固件数据={}",s);
                 }
                 MessageSender.sendFirmwareInfoToMac(machineCode,ip,port);
                 Thread.sleep(sendTime);
@@ -238,13 +254,20 @@ public class FirmwareController {
 
     @RequestMapping(value = "/machineList")
     @ResponseBody
-    public FirmResult getMachineList(@RequestParam(value="page",required=false)String page,
+    public Map getMachineList(@RequestParam(value="page",required=false)String page,
                                      @RequestParam(value="rows",required=false)String rows){
-        if(ServiceMessageCache.MapIPPort==null){
-            return new FirmResult(false,"暂无在线设备");
+        Map m1 = new HashMap();
+        List<Machine> list = new ArrayList<>();
+        for(Map.Entry m:ServiceMessageCache.MapIPPort.entrySet()){
+            String machineCode = String.valueOf(m.getKey());
+            String machineIpAndPort = (String)m.getValue();
+            String[] ipAndPortList = machineIpAndPort.split("#");
+            String ip = ipAndPortList[0];
+            String port = ipAndPortList[1];
+            list.add(new Machine(0L,Long.valueOf(machineCode),0,ip,port,null));
         }
-        FirmResult fr;
-        fr = new FirmResult(true,ServiceMessageCache.MapIPPort);
-        return fr;
+        m1.put("rows",list);
+        m1.put("total",0);
+        return m1;
     }
 }

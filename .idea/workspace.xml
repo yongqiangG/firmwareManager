@@ -7,15 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/entity/PageBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Machine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/TimeoutThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/TimeoutThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UdpClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UdpClientSocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/MsgCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/MsgCache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/ServiceMessageCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/ServiceMessageCache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HexUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HexUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeBatch.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeBatch.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeSingle.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeSingle.jsp" afterDir="false" />
     </list>
@@ -117,7 +119,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.FirmwareUtil">
+  <component name="RunManager" selected="Application.UdpClientSocket">
     <configuration name="FTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.johnny.utils.FTest" />
       <module name="firmwareManager" />
@@ -158,6 +160,7 @@
       </method>
     </configuration>
     <configuration name="tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.70" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8">
+      <option name="OPEN_IN_BROWSER" value="false" />
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8820/firmwareManager/admin/main.jsp" />
       <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <deployment>
@@ -233,13 +236,13 @@
     <list>
       <item itemvalue="Application.FTest" />
       <item itemvalue="Application.UdpClientSocket" />
-      <item itemvalue="Tomcat Server.tomcat" />
       <item itemvalue="Application.FirmwareUtil" />
+      <item itemvalue="Tomcat Server.tomcat" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FirmwareUtil" />
         <item itemvalue="Application.UdpClientSocket" />
+        <item itemvalue="Application.FirmwareUtil" />
         <item itemvalue="Application.FTest" />
       </list>
     </recent_temporary>
@@ -264,7 +267,8 @@
       <workItem from="1577456530512" duration="2293000" />
       <workItem from="1577523445749" duration="4622000" />
       <workItem from="1577628315813" duration="1928000" />
-      <workItem from="1577667815107" duration="60932000" />
+      <workItem from="1577667815107" duration="84860000" />
+      <workItem from="1578531000219" duration="36971000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -287,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577782698215</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="单个固件升级模块完成">
+      <created>1578302681872</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1578302681872</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,14 +320,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="udp数据处理" />
     <MESSAGE value="单个固件升级模块初步完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="单个固件升级模块初步完成" />
+    <MESSAGE value="单个固件升级模块完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="单个固件升级模块完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java</url>
-          <line>121</line>
+          <line>124</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>

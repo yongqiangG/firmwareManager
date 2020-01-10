@@ -185,6 +185,16 @@ public class MsgCache {
      */
     public static int stopFirmwareUpgrade = 0;
 
+    /**
+     * 单独监听70指令的设备
+     */
+    public static String machineCodeTo70 = "";
+
+    /**
+     * 升级完成标识位 升级成功:1
+     */
+    public static int successUpgrade = 0;
+
 
     public static void clearSend(){
         stopFirmwareUpgrade = 0;

@@ -176,6 +176,7 @@ public class MessageSender {
         content = toMsg(header, content);
         try {
             MessageSender.sendMsg(ip, port,content);
+            MsgCache.machineCodeTo70 = "";
             logger.info("回复硬件重启复位={}", content);
         } catch (Exception e) {
             logger.error("发送0x70指令出错了={}", e.getMessage());
