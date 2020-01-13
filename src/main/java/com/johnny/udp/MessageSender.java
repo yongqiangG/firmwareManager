@@ -352,5 +352,30 @@ public class MessageSender {
         logger.info("已发送第一条升级指令={}",content);
         sendMsg(ip, port,content, macCode, 0, Code.MAC_FIRMWARE_UPGRADE);
     }
-
+    /**
+     * 发送黎川网关连接指令,cmd02
+     * by Johnny 20190925
+     */
+    public static void sendCloudCollectMsg(String macCode,String ip,int port,String serverIp){
+        String header = getHeader(0,macCode,Code.CLOUD_COLLECT_GATEWAY);
+        StringBuffer sb = new StringBuffer("");
+        //心跳包发送间隔
+        sb.append(HexUtil.toHexString(90,2));
+        //状态上报间隔
+        sb.append(HexUtil.toHexString(90,2));
+        //设备重连间隔
+        sb.append(HexUtil.toHexString(30,2));
+        //服务器ip
+        sb.append(HexUtil.toIpHexStr(serverIp));
+        //默认端口
+        sb.append(HexUtil.toHexString(3341,4));
+        String content =sb.toString();
+        content = toMsg(header,content);
+        try {
+            MessageSender.sendMsg(ip, port,content);
+            logger.info("已发送0x02指令={}", content);
+        } catch (Exception e) {
+            logger.error("发送0x02指令出错了={}", e.getMessage());
+        }
+    }
 }

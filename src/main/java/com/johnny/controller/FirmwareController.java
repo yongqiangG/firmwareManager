@@ -270,4 +270,22 @@ public class FirmwareController {
         m1.put("total",0);
         return m1;
     }
+
+    @RequestMapping(value = "/sendServerIp")
+    @ResponseBody
+    public FirmResult sendServerIp(HttpServletRequest req){
+        FirmResult fr;
+        String machineCode = req.getParameter("machineCode");
+        String ip = ServiceMessageCache.getIpByMac(machineCode);
+        int port = ServiceMessageCache.getPort(Long.parseLong(machineCode));
+        if(ip=="" || port==0){
+            fr=new FirmResult(false,"未获取到该设备的IP和端口,请检查网络后在尝试");
+            return fr;
+        }
+        String serverIp = "139.224.220.110";
+        //String serverIp = "192.168.1.51";
+        MessageSender.sendCloudCollectMsg(machineCode,ip,port,serverIp);
+        fr = new FirmResult(true);
+        return fr;
+    }
 }

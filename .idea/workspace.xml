@@ -9,17 +9,11 @@
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageCallService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/Code.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/TimeoutThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/TimeoutThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UdpClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/UdpClientSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/MsgCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/MsgCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/ServiceMessageCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/udp/cache/ServiceMessageCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeBatch.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeBatch.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeSingle.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/firmwareUpgradeSingle.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +113,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.UdpClientSocket">
+  <component name="RunManager" selected="Tomcat Server.tomcat">
     <configuration name="FTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.johnny.utils.FTest" />
       <module name="firmwareManager" />
@@ -268,7 +262,8 @@
       <workItem from="1577523445749" duration="4622000" />
       <workItem from="1577628315813" duration="1928000" />
       <workItem from="1577667815107" duration="84860000" />
-      <workItem from="1578531000219" duration="36971000" />
+      <workItem from="1578531000219" duration="38357000" />
+      <workItem from="1578876864888" duration="5466000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -298,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578302681872</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="单个固件升级模块完成">
+      <created>1578647295856</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578647295856</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,6 +332,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/johnny/utils/FirmwareUtil.java</url>
           <line>124</line>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java</url>
+          <line>279</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/johnny/udp/MessageSender.java</url>
+          <line>372</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>

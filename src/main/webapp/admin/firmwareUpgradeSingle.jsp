@@ -75,6 +75,9 @@
                 <td></td>
                 <td><a href="javascript:getIpAndPort()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">获取设备IP端口</a></td>
                 <td id="getIpAndPortInfo"></td>
+                <!--发送0x02指令-->
+                <td><a href="javascript:sendServerIp()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发送0x02指令</a></td>
+                <td id="sendServerIpInfo"></td>
             </tr>
             <tr>
                 <td></td>
@@ -284,6 +287,20 @@
                     }
                 }
             )
+        }
+    }
+
+    //发送0x02云端ip指令
+    function sendServerIp(){
+        var machineCode = $("#machineCode").val();
+        if(validMachineCode()){
+            $.post('/firmwareManager/firmware/sendServerIp',{machineCode:machineCode},function(result){
+                if(result && result.success){
+                    layer.msg('机器码'+machineCode+'已发送0x02指令');
+                }else{
+                    layer.msg(result.errorInfo);
+                }
+            })
         }
     }
 

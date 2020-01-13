@@ -39,4 +39,7 @@ public class Code {
 
     //硬件心跳包
     public static final int MAC_HEART_BEAT = 0x88;
+
+    //云端连接指令
+    public static final int CLOUD_COLLECT_GATEWAY = 0x02;
 }
