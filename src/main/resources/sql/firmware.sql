@@ -34,3 +34,9 @@ CREATE TABLE `machine`
 
 INSERT INTO `machine`
 values ('1000', '812005399', '89', '', '', '2019-12-26 15:00:00');
+
+-- machine表增加房型属性 varchar(100)
+alter table machine add `room_type_name` varchar(100) default '';
+
+-- machine表增加房型属性 varchar(100)
+alter table machine add `room_no` varchar(100) default '';

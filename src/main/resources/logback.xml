@@ -62,7 +62,7 @@
 
     <!-- 根节点，表名基本的日志级别，里面可以由多个appender规则 -->
     <!-- level="info"代表基础日志级别为info -->
-    <root level="error">
+    <root level="info">
         <!-- 引入控制台输出规则 -->
         <appender-ref ref="consoleLog" />
         <appender-ref ref="fileInfoLog" />

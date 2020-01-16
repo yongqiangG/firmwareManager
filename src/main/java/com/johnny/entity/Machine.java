@@ -9,14 +9,37 @@ public class Machine {
     private String machineIp;
     private String machinePort;
     private Date createTime;
+    private String roomTypeName;
+    private String roomNo;
 
-    public Machine(Long machineId, Long machineCode, int hotelId, String machineIp, String machinePort, Date createTime) {
+
+
+    public Machine() {
+    }
+
+
+
+    public Machine(Long machineId, Long machineCode, int hotelId, String machineIp, String machinePort) {
         this.machineId = machineId;
         this.machineCode = machineCode;
         this.hotelId = hotelId;
         this.machineIp = machineIp;
         this.machinePort = machinePort;
-        this.createTime = createTime;
+    }
+    public String getRoomTypeName() {
+        return roomTypeName;
+    }
+
+    public void setRoomTypeName(String roomTypeName) {
+        this.roomTypeName = roomTypeName;
+    }
+
+    public String getRoomNo() {
+        return roomNo;
+    }
+
+    public void setRoomNo(String roomNo) {
+        this.roomNo = roomNo;
     }
 
     public Long getMachineId() {

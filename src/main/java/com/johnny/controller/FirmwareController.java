@@ -264,7 +264,7 @@ public class FirmwareController {
             String[] ipAndPortList = machineIpAndPort.split("#");
             String ip = ipAndPortList[0];
             String port = ipAndPortList[1];
-            list.add(new Machine(0L,Long.valueOf(machineCode),0,ip,port,null));
+            list.add(new Machine(0L,Long.valueOf(machineCode),0,ip,port));
         }
         m1.put("rows",list);
         m1.put("total",0);
