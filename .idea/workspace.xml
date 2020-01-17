@@ -7,31 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/entity/MachineGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/exception/FirmwareException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/exception/HotelException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/exception/MachineException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/HotelService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/MachineService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/impl/HotelServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/impl/MachineServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/johnny/utils/HttpUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/HotelDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/johnny/dao/HotelDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/johnny/dao/MachineDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/firmwareManager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/firmwareManager.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firmwareManager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/firmwareManager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/FirmwareController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/dao/HotelDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/dao/HotelDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/dao/MachineDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/dao/MachineDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/entity/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/MachineDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/MachineDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/firmware.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/firmware.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/service/MachineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/MachineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/service/impl/MachineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/impl/MachineServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +121,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MachineDaoTest.queryByRoomTypeName">
+  <component name="RunManager" selected="Tomcat Server.tomcat">
     <configuration name="HttpUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.johnny.utils.HttpUtil" />
       <module name="firmwareManager" />
@@ -295,12 +274,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Tomcat Server.tomcat" />
+      <item itemvalue="Application.HttpUtil" />
       <item itemvalue="JUnit.MachineDaoTest.queryByHotelId" />
       <item itemvalue="JUnit.MachineDaoTest.queryByRoomTypeName" />
       <item itemvalue="JUnit.HotelDaoTest.getHotelUrlById" />
-      <item itemvalue="Application.HttpUtil" />
       <item itemvalue="JUnit.MachineDaoTest.getRoomTypeById" />
+      <item itemvalue="Tomcat Server.tomcat" />
     </list>
     <recent_temporary>
       <list>
@@ -336,7 +315,9 @@
       <workItem from="1578531000219" duration="38357000" />
       <workItem from="1578876864888" duration="6132000" />
       <workItem from="1578963338505" duration="502000" />
-      <workItem from="1578964174917" duration="37607000" />
+      <workItem from="1578964174917" duration="40833000" />
+      <workItem from="1579225015895" duration="301000" />
+      <workItem from="1579225650261" duration="2641000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -380,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578907433959</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="批量升级完善">
+      <created>1579167916083</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1579167916083</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,7 +392,8 @@
     <MESSAGE value="单个固件升级模块初步完成" />
     <MESSAGE value="单个固件升级模块完成" />
     <MESSAGE value="新增02指令发送" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增02指令发送" />
+    <MESSAGE value="批量升级完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="批量升级完善" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -421,7 +410,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java</url>
-          <line>35</line>
+          <line>36</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">
@@ -431,7 +420,7 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java</url>
-          <line>42</line>
+          <line>43</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">

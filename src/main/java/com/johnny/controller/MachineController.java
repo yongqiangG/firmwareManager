@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -47,8 +48,33 @@ public class MachineController {
         return fr;
     }
     //获取房型
-
+    @RequestMapping(value = "/{hotelId}/getRoomType",
+                    method = RequestMethod.POST,
+                    produces = {"application/json;charset=UTF-8"}
+    )
+    @ResponseBody
+    public FirmResult getRoomType(@PathVariable("hotelId") int hotelId){
+        List<String> roomTypeList = machineService.getRoomType(hotelId);
+        if(roomTypeList.size()==0){
+            return new FirmResult(false,"未获取到任何房型");
+        }
+        return new FirmResult(true,roomTypeList);
+    }
     //根据房型获取设备
-
+    @RequestMapping(
+            value = "/{hotelId}/queryByRoomTypeName",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"}
+    )
+    @ResponseBody
+    public FirmResult queryByRoomTypeName(HttpServletRequest requestq, @PathVariable("hotelId")int hotelId) {
+        String roomTypeName = requestq.getParameter("roomTypeName");
+        List<Machine> machines = machineService.queryByRoomTypeName(hotelId,roomTypeName,0,200);
+        if(machines.size()==0){
+            return new FirmResult(false,"未获取到该房型的任何设备");
+        }
+        return new FirmResult(true,machines);
+    }
     //批量升级请求
+
 }

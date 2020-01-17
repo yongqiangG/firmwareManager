@@ -12,5 +12,6 @@ public interface MachineService {
     List<Machine> queryByHotelId(int id,int offset,int limit);
     //根据酒店ID和房型查找设备
     List<Machine> queryByRoomTypeName(int id,String roomTypeName,int offset,int limit);
-
+    //获取房型
+    List<String> getRoomType(int id);
 }

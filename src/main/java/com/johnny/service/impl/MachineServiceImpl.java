@@ -51,8 +51,12 @@ public class MachineServiceImpl implements MachineService {
 
     @Override
     public List<Machine> queryByRoomTypeName(int id, String roomTypeName, int offset, int limit) {
+        return machineDao.queryByRoomTypeName(id,roomTypeName,offset,limit);
+    }
 
-        return null;
+    @Override
+    public List<String> getRoomType(int id) {
+        return machineDao.getRoomTypeById(id);
     }
 
 }
