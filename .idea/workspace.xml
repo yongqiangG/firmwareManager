@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/johnny/json.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/controller/MachineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/service/MachineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/MachineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/johnny/service/impl/MachineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/johnny/service/impl/MachineServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,13 +119,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.tomcat">
+  <component name="RunManager" selected="Application.json">
     <configuration name="HttpUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.johnny.utils.HttpUtil" />
       <module name="firmwareManager" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.johnny.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="json" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.johnny.json" />
+      <module name="firmwareManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.johnny.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,22 +173,6 @@
       <option name="PACKAGE_NAME" value="com.johnny.dao" />
       <option name="MAIN_CLASS_NAME" value="com.johnny.dao.MachineDaoTest" />
       <option name="METHOD_NAME" value="getRoomTypeById" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MachineDaoTest.queryByHotelId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="firmwareManager" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.johnny.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.johnny.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.johnny.dao.MachineDaoTest" />
-      <option name="METHOD_NAME" value="queryByHotelId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -275,19 +270,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.HttpUtil" />
-      <item itemvalue="JUnit.MachineDaoTest.queryByHotelId" />
       <item itemvalue="JUnit.MachineDaoTest.queryByRoomTypeName" />
       <item itemvalue="JUnit.HotelDaoTest.getHotelUrlById" />
       <item itemvalue="JUnit.MachineDaoTest.getRoomTypeById" />
       <item itemvalue="Tomcat Server.tomcat" />
+      <item itemvalue="Application.json" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.json" />
         <item itemvalue="JUnit.MachineDaoTest.queryByRoomTypeName" />
         <item itemvalue="JUnit.MachineDaoTest.getRoomTypeById" />
         <item itemvalue="Application.HttpUtil" />
         <item itemvalue="JUnit.HotelDaoTest.getHotelUrlById" />
-        <item itemvalue="JUnit.MachineDaoTest.queryByHotelId" />
       </list>
     </recent_temporary>
   </component>
@@ -317,7 +312,7 @@
       <workItem from="1578963338505" duration="502000" />
       <workItem from="1578964174917" duration="40833000" />
       <workItem from="1579225015895" duration="301000" />
-      <workItem from="1579225650261" duration="2641000" />
+      <workItem from="1579225650261" duration="15611000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -368,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579167916083</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="批量升级接口">
+      <created>1579239887817</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1579239887817</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,7 +395,8 @@
     <MESSAGE value="单个固件升级模块完成" />
     <MESSAGE value="新增02指令发送" />
     <MESSAGE value="批量升级完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="批量升级完善" />
+    <MESSAGE value="批量升级接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="批量升级接口" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
