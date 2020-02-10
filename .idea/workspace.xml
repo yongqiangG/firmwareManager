@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/johnny/json.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -270,11 +269,11 @@
     </configuration>
     <list>
       <item itemvalue="Application.HttpUtil" />
+      <item itemvalue="Application.json" />
       <item itemvalue="JUnit.MachineDaoTest.queryByRoomTypeName" />
       <item itemvalue="JUnit.HotelDaoTest.getHotelUrlById" />
       <item itemvalue="JUnit.MachineDaoTest.getRoomTypeById" />
       <item itemvalue="Tomcat Server.tomcat" />
-      <item itemvalue="Application.json" />
     </list>
     <recent_temporary>
       <list>
@@ -312,7 +311,7 @@
       <workItem from="1578963338505" duration="502000" />
       <workItem from="1578964174917" duration="40833000" />
       <workItem from="1579225015895" duration="301000" />
-      <workItem from="1579225650261" duration="15611000" />
+      <workItem from="1579225650261" duration="17097000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -370,7 +369,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579239887817</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="批量升级接口">
+      <created>1579512473451</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1579512473451</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
