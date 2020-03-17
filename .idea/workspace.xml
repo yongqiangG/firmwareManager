@@ -7,6 +7,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="086d02e5-4532-4410-af95-23260eebb0aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/controller/FirmwareController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/controller/MachineController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/dao/FirmwareDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/dao/HotelDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/dao/MachineDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/dto/FirmResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/entity/Firmware.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/entity/Hotel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/entity/Machine.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/entity/MachineGroup.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/entity/PageBean.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/exception/FirmwareException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/exception/HotelException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/exception/MachineException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/service/HotelService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/service/MachineService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/service/impl/HotelServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/service/impl/MachineServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/Code.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/Config.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/LogicMsgPCSenderThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MainThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MessageCallService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MessageReader.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MessageSendThreadMain.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MessageSendThreadMainListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MessageSender.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/MessageSenderThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/Msg.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/ResponseMsg.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/TimeoutThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/UDPMainThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/UDPMainThreadListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/UdpClientSocket.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/UdpServer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/UdpServerThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/cache/MsgCache.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/udp/cache/ServiceMessageCache.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/utils/CRC16.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/utils/FTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/utils/FirmwareUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/utils/HexUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/johnny/utils/HttpUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/FirmwareDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/HotelDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/MachineDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/sql/firmware.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/johnny/Person.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/johnny/dao/HotelDaoTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/johnny/dao/MachineDaoTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/johnny/json$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/johnny/json$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/johnny/json.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -312,6 +365,10 @@
       <workItem from="1578964174917" duration="40833000" />
       <workItem from="1579225015895" duration="301000" />
       <workItem from="1579225650261" duration="17097000" />
+      <workItem from="1581328292040" duration="95000" />
+      <workItem from="1581903100080" duration="1054000" />
+      <workItem from="1584352831367" duration="19000" />
+      <workItem from="1584424398084" duration="899000" />
     </task>
     <task id="LOCAL-00001" summary="udp数据处理">
       <created>1576748637922</created>
@@ -376,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579512473451</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="批量升级接口0210">
+      <created>1581328358440</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1581328358440</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,7 +466,8 @@
     <MESSAGE value="新增02指令发送" />
     <MESSAGE value="批量升级完善" />
     <MESSAGE value="批量升级接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="批量升级接口" />
+    <MESSAGE value="批量升级接口0210" />
+    <option name="LAST_COMMIT_MESSAGE" value="批量升级接口0210" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
